@@ -6,7 +6,7 @@ const Header = () => {
         <StHeader>
             <StHeaderContainer>
                 <StLogoContainer>
-                    <StLogoLink>
+                    <StLogoLink to="/">
                         <StLogoImg src="https://s-lol-web.op.gg/images/icon/opgglogo.svg?v=1666684602785"/>
                     </StLogoLink>
                 </StLogoContainer>
@@ -26,11 +26,71 @@ const Header = () => {
                             </StLolSpan>
                             League of Legends
                         </StLolA>
-
-                    </StNavigationListContainer>
-                    
+                        <StValA href="https://valorant.op.gg/">
+                            <StValSpan>
+                                <StValImg src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-valorant-white.svg" alt="리그오브레전드"/>
+                            Beta
+                            </StValSpan>
+                            Valorant
+                        </StValA>
+                        <StPUBGA href="https://pubg.op.gg/">
+                            <StPUBGSpan>
+                                <StPUBGImg src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-pubg-gray.svg" alt="리그오브레전드"/>
+                            </StPUBGSpan>
+                            PUBG
+                        </StPUBGA>
+                        <StWatchA href="https://overwatch.op.gg/">
+                            <StWatchSpan>
+                                <StWatchImg src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-overwatch-gray.svg" alt="리그오브레전드"/>
+                            </StWatchSpan>
+                            OVERWATCH
+                        </StWatchA>
+                        <StEternalA href="https://er.op.gg/">
+                            <StEternalSpan>
+                                <StEternalImg src="https://opgg-gnb.akamaized.net/static/images/icons/img_navi_bs.svg" alt="리그오브레전드"/>
+                            </StEternalSpan>
+                            Eternal Return
+                        </StEternalA>
+                        <StDuoA href="https://duo.op.gg/">
+                            <StDuoSpan>
+                                <StDuoImg src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-duo-gray.svg" alt="리그오브레전드"/>
+                            </StDuoSpan>
+                            Duo
+                        </StDuoA>
+                        <StQWERA href="https://qwer.gg/ko">
+                            <StQWERSpan>
+                                <StQWERImg src="https://opgg-gnb.akamaized.net/static/images/icons/opgg%20favicon%20white_220107.svg" alt="리그오브레전드"/>
+                            </StQWERSpan>
+                            QWER (Esports Data)
+                        </StQWERA>
+                        <StHeaderLogoutToggle>
+                            <StHeaderLogoutSpan>
+                                닉네임
+                                <StLogoutImg src="https://talk.op.gg/images/icon-gnb-dropdown.png"/>
+                            </StHeaderLogoutSpan>
+                        </StHeaderLogoutToggle>
+                        {/* <HeaderLoginButton>로그인</HeaderLoginButton> */}
+                    </StNavigationListContainer>    
                 </StNavigationContontainer>
             </StHeaderContainer>
+            <StSecondHeaderContainer>
+                <StSecondNavigationContontainer>
+                    <StLeftHeader>
+                        <StSecondLolA to="/Community">
+                            리그오브레전드
+                        </StSecondLolA>
+                        <StSecondPUBGA>
+                            배틀그라운드
+                        </StSecondPUBGA>
+                        <StSecondWatchA>
+                            오버워치
+                        </StSecondWatchA>
+                        <StSecondRainA>
+                            레인보우 식스 시즈
+                        </StSecondRainA>
+                    </StLeftHeader>
+                </StSecondNavigationContontainer>
+            </StSecondHeaderContainer>
         </StHeader>
         
     )
@@ -229,17 +289,20 @@ const StValA = styled.a`
     vertical-align: middle;
 `
 const StValSpan = styled.span`
-    padding: 0;
     border: 0;
     word-break: keep-all;
-    position: absolute;
-    left: 3px;
-    top: 50%;
-    display: flex;
-    align-content: center;
-    width: 24px;
-    height: 24px;
-    margin: -12px 0 0;
+    display: inline-block;
+    border-radius: 9px;
+    height: 16px;
+    padding: 0 6px;
+    margin: 0 4px 0 0;
+    background-color: #ffb900;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #28344e;
+    vertical-align: middle;
 `
 const StValImg = styled.img`
     padding: 0;
@@ -490,3 +553,155 @@ const StQWERImg = styled.img`
     margin: -12px 0 0;
     vertical-align: middle;
 `
+const StSecondHeaderContainer = styled.div`
+    padding: 0;
+    overflow-x: hidden;
+    overflow: visible;
+    background: #46cfa7;
+    border-bottom: 1px solid #31b38c;
+    border: 0;
+    vertical-align: baseline;
+    margin: 0;
+    height: 48px;
+`
+const StSecondNavigationContontainer =styled.div`
+    max-width: 1044px;
+    margin: 0 auto;
+    display: block;
+    padding: 0;
+    border: 0;
+`
+const StLeftHeader = styled.div`
+    float: left;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    justify-content: flex-start;
+    align-items: center;
+    width: auto;
+`
+const StSecondLolA = styled(Link)`
+    display: block;
+    float: left;
+    line-height: 48px;
+    margin-left: 0;
+    position: relative;
+    align-items: center;
+    height: 48px;
+    font-size: 15px;
+    box-sizing: border-box;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+`
+const StSecondPUBGA = styled.a`
+    display: block;
+    float: left;
+    line-height: 48px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    font-size: 15px;
+    box-sizing: border-box;
+    color: #fff;
+    margin-left: 24px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    margin-left: 24px;
+`
+const StSecondWatchA = styled.a`
+    display: block;
+    float: left;
+    line-height: 48px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    font-size: 15px;
+    box-sizing: border-box;
+    color: #fff;
+    margin-left: 24px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    margin-left: 24px;
+`
+const StSecondRainA = styled.a`
+    display: block;
+    float: left;
+    line-height: 48px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    font-size: 15px;
+    box-sizing: border-box;
+    color: #fff;
+    margin-left: 24px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    margin-left: 24px;
+`
+const HeaderLoginButton = styled.div`
+    font-size: 12px;
+    color: #c3cbd1;
+    margin-top: 4px;
+    margin-right: 10px;
+    min-width: 50px;
+    vertical-align: top;
+    text-align: center;
+    line-height: 15px;
+    padding: 8px 0 7px;
+    float: right;
+    cursor: pointer;
+`
+const StHeaderLogoutToggle = styled.button`
+    margin-top: 4px;
+    margin-left: 16px;
+    float: right;
+    background: none;
+    cursor: pointer;
+    margin: 0;
+    font-size: 14px;
+    outline: 0;
+    appearance: auto;
+    writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    
+`
+const StHeaderLogoutSpan = styled.span`
+    font-size: 12px;
+    color: #c3cbd1;
+    position: relative;
+    min-width: 120px;
+    display: inline-block;
+    padding: 0 16px;
+    text-align: left;
+    vertical-align: middle;
+`
+const StLogoutImg = styled.img`
+    border-radius: 4px;
+    padding: 4px;
+    vertical-align: middle;
+`
+// const StDropdown
