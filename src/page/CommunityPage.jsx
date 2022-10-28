@@ -1,6 +1,10 @@
-const CommunityPage=( ) =>{
+import Layout from "../components/Layout"
+
+const CommunityPage=() =>{
     return(
-        <div> 커뮤니티페이지22222222</div>
+        <Layout>
+           
+        </Layout>
     )
 }
 export default CommunityPage
