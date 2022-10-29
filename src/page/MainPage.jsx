@@ -15,9 +15,18 @@ const MainPage = () => {
           <StTitle>op.gg Talk 인기글</StTitle>
           <StArticle>
             <StBox>
-              <div>1</div>
-              <div>사진</div>
-              <div>멍청한 사람과 논쟁하는 느낌[40]</div>
+              <div className="title">1</div>
+              <StTitleImg src="https://opgg-com-image.akamaized.net/attach/images/20221029031554.1704113.jpg"></StTitleImg>
+              <StContentBox>
+                <div className="content">
+                  <span className="miniTitle">멍청한 사람과 논쟁하는 느낌</span>
+                  <span className="like">[40]</span>
+                </div>
+                <StMeta>
+                  <li>10시간 전</li>
+                  <li className="nickname">삼각탈출</li>
+                </StMeta>
+              </StContentBox>
             </StBox>
           </StArticle>
         </StListBox>
@@ -55,10 +64,57 @@ const StBox = styled.div`
   display: flex;
   font-size: 14px;
   padding: 17px 0px 16px 20px;
-
   justify-content: space-between;
+
+  .title {
+    font-size: 18px;
+    font-style: oblique;
+    font-weight: bold;
+    margin: auto;
+    width: 30px;
+  }
 `;
 
 const StArticle = styled.div`
   border-bottom: 0.5px solid #e0dedef0;
+`;
+
+const StTitleImg = styled.img`
+  border: 0;
+  height: 56px;
+  width: 100px;
+  text-align: center;
+  max-width: 100%;
+`;
+
+const StContentBox = styled.div`
+  padding: 0px 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+  flex: 1 1 0%;
+
+  .miniTitle {
+    font-size: 14px;
+    color: rgb(135, 146, 146);
+  }
+  .miniTitle:hover {
+    color: #5383e8;
+    border-bottom: 0.5px solid #5383e8;
+  }
+  .like {
+    margin-left: 4px;
+    color: #5383e8;
+  }
+`;
+
+const StMeta = styled.ul`
+  margin-top: 6px;
+  color: rgb(135, 146, 146);
+  line-height: 15px;
+  font-size: 12px;
+  display: flex;
+
+  .nickname {
+    margin-left: 12px;
+  }
 `;
