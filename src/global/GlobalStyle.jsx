@@ -1,9 +1,10 @@
-import {createGlobalStyle} from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 
 @import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR:wght@100;300&display=swap');
+
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
     a, abbr, acronym, address, big, cite, code,
@@ -50,6 +51,6 @@ const GlobalStyles = createGlobalStyle`
     body{
         font-family: 'Noto Sans KR', sans-serif;
     }
-`; 
+`;
 
 export default GlobalStyles;
