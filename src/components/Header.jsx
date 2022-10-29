@@ -68,6 +68,15 @@ const Header = () => {
                                 닉네임
                                 <StLogoutImg src="https://talk.op.gg/images/icon-gnb-dropdown.png"/>
                             </StHeaderLogoutSpan>
+                            {/* <StUserSetButton>계정설정</StUserSetButton> */}
+                            <StDropdown>
+                                <StDropDownList>
+                                    <StDropDownListItem>
+                                        <StUserSetButton>계정 설정</StUserSetButton>
+                                        <StUserSetButton>로그아웃</StUserSetButton>
+                                    </StDropDownListItem>
+                                </StDropDownList>
+                            </StDropdown>
                         </StHeaderLogoutToggle>
                         {/* <HeaderLoginButton>로그인</HeaderLoginButton> */}
                     </StNavigationListContainer>    
@@ -216,7 +225,6 @@ const StNavigationListContainer = styled.div`
     padding: 0;
     border: 0;
     word-break: keep-all;
-    overflow: hidden;
     -webkit-box-flex: 1;
     flex: 1;
     vertical-align: baseline;
@@ -667,15 +675,15 @@ const HeaderLoginButton = styled.div`
 `
 const StHeaderLogoutToggle = styled.button`
     margin-top: 4px;
-    margin-left: 16px;
     float: right;
     background: none;
+    display: flex;
+    position: relative;
     cursor: pointer;
     margin: 0;
     font-size: 14px;
     outline: 0;
     appearance: auto;
-    writing-mode: horizontal-tb !important;
     text-rendering: auto;
     color: buttontext;
     letter-spacing: normal;
@@ -687,21 +695,56 @@ const StHeaderLogoutToggle = styled.button`
     text-align: center;
     align-items: flex-start;
     box-sizing: border-box;
-    
+    border: 0px;
+    flex-direction: column;
 `
 const StHeaderLogoutSpan = styled.span`
     font-size: 12px;
     color: #c3cbd1;
     position: relative;
     min-width: 120px;
-    display: inline-block;
-    padding: 0 16px;
-    text-align: left;
+    text-align: right;
     vertical-align: middle;
+    float: right;
 `
 const StLogoutImg = styled.img`
-    border-radius: 4px;
-    padding: 4px;
+    padding: 4px 0 4px 4px;
     vertical-align: middle;
 `
-// const StDropdown
+const StDropdown = styled.div`
+    justify-content: left;
+    text-align: left;
+    display: none;
+    top: 40px;
+    right: 5px;
+    position: absolute;
+    width: 160px;
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 20%);
+    background-color: #fff;
+    ${StHeaderLogoutToggle}:hover & {display : block}
+`
+const StDropDownList = styled.ul`
+    list-style: none;
+    display: block;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 15px;
+`
+const StDropDownListItem = styled.li`
+    display: flex;
+    margin: 0;
+    border: 0;
+    vertical-align: baseline;
+    flex-direction: column;
+    justify-content: left;
+`
+const StUserSetButton = styled.a`
+    box-sizing: border-box;
+    padding: 0;
+    font-size: 14px;
+    color: #1e2022;
+    border: 0;
+    border-radius: 0;
+    width: 100%;
+    padding: 10px 0;
+`
