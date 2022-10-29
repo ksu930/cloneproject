@@ -63,12 +63,12 @@ const Header = () => {
                             </StQWERSpan>
                             QWER (Esports Data)
                         </StQWERA>
+                        {false? 
                         <StHeaderLogoutToggle>
                             <StHeaderLogoutSpan>
                                 닉네임
                                 <StLogoutImg src="https://talk.op.gg/images/icon-gnb-dropdown.png"/>
                             </StHeaderLogoutSpan>
-                            {/* <StUserSetButton>계정설정</StUserSetButton> */}
                             <StDropdown>
                                 <StDropDownList>
                                     <StDropDownListItem>
@@ -78,7 +78,7 @@ const Header = () => {
                                 </StDropDownList>
                             </StDropdown>
                         </StHeaderLogoutToggle>
-                        {/* <HeaderLoginButton>로그인</HeaderLoginButton> */}
+                        :<HeaderLoginButton>로그인</HeaderLoginButton>}
                     </StNavigationListContainer>    
                 </StNavigationContontainer>
             </StHeaderContainer>
