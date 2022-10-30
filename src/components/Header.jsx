@@ -63,7 +63,7 @@ const Header = () => {
                             </StQWERSpan>
                             QWER (Esports Data)
                         </StQWERA>
-                        {false? 
+                        {true? 
                         <StHeaderLogoutToggle>
                             <StHeaderLogoutSpan>
                                 닉네임
@@ -114,7 +114,6 @@ const StHeader = styled.div`
     padding: 0;
     border: 0;
     vertical-align: baseline;
-    position: sticky;
     top: 0;
     word-break: keep-all;
 `
