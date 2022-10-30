@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import CommunityLayout from "../components/community/CommunityLayout"
 import Footer from "../components/Footer"
-import Header from "../components/Header"
 import Layout from "../components/Layout"
 
 const CommunityPage=() =>{
@@ -63,7 +62,7 @@ const CommunityPage=() =>{
                                         </label>
                                         <input type="text" name="q" className="sub-header-search__input" placeholder="검색"/>
                                         <button className="sub-header-search__button">
-                                            <img src="https://talk.op.gg/images/icon-search@2x.png"></img>
+                                            <img src="https://talk.op.gg/images/icon-search@2x.png" alt=""></img>
                                         </button>
                                     </form>
                                 </div>
