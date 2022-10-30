@@ -34,6 +34,7 @@ const Layout = ({children}) => {
 export default Layout
 
 const St1WrapList = styled.div`
+    background: #ebeef1;
     min-width: 1080px;
     position: relative;
     min-height: 100%;
