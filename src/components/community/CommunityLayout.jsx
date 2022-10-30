@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import Layout from "../Layout"
 
 const CommunityLayout = ({children}) =>{
     return(
@@ -17,10 +16,45 @@ const CommunityLayout = ({children}) =>{
                                 </div>
                             </div>
                         </StSidebarContentHeader>
+                        <StSidebarContent>
+                            <div className="sidebar-menu">
+                                <div className="sidebar-menu__title">홈</div>
+                                <ui className="sidebar-menu__list">
+                                    <li className="sidebar-menu__item ">
+                                        <StHomeLink to="/Community">
+                                            전체
+                                        </StHomeLink>
+                                    </li>
+                                </ui>
+                            </div>
+                            <div className="sidebar-menu">
+                                <div className="sidebar-menu__title">정보</div>
+                                <ui className="sidebar-menu__list">
+                                    <li className="sidebar-menu__item ">
+                                        <div className="a">OP.GG 기획</div>
+                                        <div className="a">유저 뉴스</div>
+                                        <div className="a">팁과 노하우</div>
+                                    </li>
+                                </ui>
+                            </div>
+                            <div className="sidebar-menu">
+                                <div className="sidebar-menu__title">커뮤니티</div>
+                                <ui className="sidebar-menu__list">
+                                    <li className="sidebar-menu__item ">
+                                        <div className="a">자유</div>
+                                        <div className="a">유머</div>
+                                        <div className="a">영상</div>
+                                        <div className="a">유저 찾기</div>
+                                        <div className="a">사건 사고</div>
+                                        <div className="a">팬 아트</div>
+                                    </li>
+                                </ui>
+                            </div>
+                        </StSidebarContent>
                     </StSidebarContentWrap>
                 </StSidebarInner>
             </StSidebar>
-            
+            {children}
 
         </Stcontent>
     )
@@ -33,8 +67,6 @@ const Stcontent = styled.div`
     position: relative;
     max-width: 1044px;
     margin: 0 auto;
-    padding: 0;
-    border: 0;
     display: block;
 `
 const StSidebar = styled.div`
@@ -97,5 +129,44 @@ const StLoginLink =styled(Link)`
         border-radius: 4px;
         border: 1px solid #dddfe4;
         cursor: pointer;
+        width: 100%;
     }
+`
+const StSidebarContent = styled.div`
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: block;
+    .sidebar-menu{
+        border-top: 1px solid #ebeef1;
+        padding: 9px 16px 8px;
+    }
+    .sidebar-menu__title{
+        padding-bottom: 8px;
+        line-height: 15px;
+        font-size: 12px;
+        color: #7b858e;
+    }
+    .sidebar-menu__list{
+        list-style: none;
+    }
+    .sidebar-menu__item {
+        line-height: 17px;
+        font-size: 14px;
+        color: #1e2022;
+        border-radius: 4px;
+        .a{
+            padding: 8px 12px 7px;
+            display: block;
+            color: inherit;
+            cursor: pointer;
+        }
+    }
+`
+const StHomeLink = styled(Link)`
+    padding: 8px 12px 7px;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
 `

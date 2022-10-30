@@ -63,7 +63,7 @@ const Header = () => {
                             </StQWERSpan>
                             QWER (Esports Data)
                         </StQWERA>
-                        {false? 
+                        {true? 
                         <StHeaderLogoutToggle>
                             <StHeaderLogoutSpan>
                                 닉네임
