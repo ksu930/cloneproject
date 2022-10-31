@@ -338,7 +338,6 @@ const StInputDiv = styled.div`
   }
 
   input {
-    background: var(--gray0);
     position: relative;
     width: 480px;
     padding: 20px 0 0;
@@ -350,6 +349,7 @@ const StInputDiv = styled.div`
 `;
 
 const StSubmitButton = styled.button`
+  background-color: white;
   background-image: url(https://s-lol-web.op.gg/images/icon/icon-gg.svg);
   background-repeat: no-repeat;
   background-size: 42px;

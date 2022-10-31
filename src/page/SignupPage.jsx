@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { __addUsers } from "../redux/modules/userSlice";
+// import {overlapEmail, overlapName, __addUser,__nameCheck,__emailCheck } from
 const SignupPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -12,6 +13,8 @@ const SignupPage = () => {
     password: "",
     name: "",
   };
+
+  // const  {overlapEmail,overlapName}
 
   const [user, setUser] = useState(initialState);
   const onChangeHandler = (e) => {
@@ -58,8 +61,8 @@ const SignupPage = () => {
                         name="email"
                         value={user.email}
                         onChange={onChangeHandler}
+                        placeholder="이메일 주소"
                       ></input>
-                      <StIdLavel>이메일 주소</StIdLavel>
                     </div>
                     <StNameInput>
                       <div className="inputState">
@@ -69,8 +72,8 @@ const SignupPage = () => {
                           name="name"
                           value={user.name}
                           onChange={onChangeHandler}
+                          placeholder="닉네임"
                         />
-                        <label className="inputLabel">닉네임</label>
                       </div>
                     </StNameInput>
                     <div className="SignUpMsg">
@@ -84,8 +87,8 @@ const SignupPage = () => {
                           name="password"
                           value={user.password}
                           onChange={onChangeHandler}
+                          placeholder="비밀번호"
                         />
-                        <label>비밀번호</label>
                       </StPwBox>
                       <StSignUpButtonBox>
                         <button className="canCle">취소</button>
@@ -180,6 +183,19 @@ const StRoot = styled.div`
     padding: 0;
     background-color: transparent;
     outline: 0;
+    ::placeholder {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+      width: 100%;
+      color: #7b858e;
+      bottom: 3px;
+      left: 0;
+      top: 11px;
+      transform-origin: bottom left;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition-property: color, bottom, transform;
+    }
   }
   .SignUpMsg {
     position: relative;
@@ -195,20 +211,6 @@ const StImg = styled.img`
   cursor: pointer;
 `;
 
-const StIdLavel = styled.label`
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  width: 100%;
-  color: #7b858e;
-  position: absolute;
-  bottom: 3px;
-  left: 0;
-  top: 11px;
-  transform-origin: bottom left;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transition-property: color, bottom, transform;
-`;
 const StNameInput = styled.div`
   .inputState {
     margin-top: 27px;
@@ -223,20 +225,21 @@ const StNameInput = styled.div`
     padding: 0;
     background-color: transparent;
     outline: 0;
-  }
-  .inputLabel {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    width: 100%;
-    color: #7b858e;
-    position: absolute;
-    bottom: 3px;
-    left: 0;
-    top: 11px;
-    transform-origin: bottom left;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-property: color, bottom, transform;
+
+    ::placeholder {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+      width: 100%;
+      color: #7b858e;
+      position: absolute;
+      bottom: 3px;
+      left: 0;
+      top: 11px;
+      transform-origin: bottom left;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition-property: color, bottom, transform;
+    }
   }
 `;
 const StPwBox = styled.div`
@@ -251,20 +254,19 @@ const StPwBox = styled.div`
     padding: 0;
     background-color: transparent;
     outline: 0;
-  }
-  label {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    width: 100%;
-    color: #7b858e;
-    position: absolute;
-    bottom: 3px;
-    left: 0;
-    top: 11px;
-    transform-origin: bottom left;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-property: color, bottom, transform;
+    ::placeholder {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+      width: 100%;
+      color: #7b858e;
+      bottom: 3px;
+      left: 0;
+      top: 11px;
+      transform-origin: bottom left;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition-property: color, bottom, transform;
+    }
   }
 `;
 const StSignUpButtonBox = styled.div`

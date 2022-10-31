@@ -60,8 +60,8 @@ const LoginPage = () => {
                     name="email"
                     value={loginUser.email}
                     onChange={onChangeHandler}
+                    placeholder="이메일 주소"
                   />
-                  <label>이메일 주소</label>
                 </StId>
               </div>
               <div>
@@ -72,8 +72,8 @@ const LoginPage = () => {
                     onChange={onChangeHandler}
                     type="password"
                     autocomplete="off"
+                    placeholder="비밀번호"
                   />
-                  <label>비밀번호</label>
                 </StId>
               </div>
               <StLoginCheck>
@@ -82,12 +82,6 @@ const LoginPage = () => {
                     <input className="checkbox" type="checkbox" />
                   </span>
                   <label>로그인 상태 유지하기</label>
-
-                  {/* <StPwSpan>
-                    <a href="https://member.op.gg/find/reset-password/send-email">
-                      비밀번호를 잊으셨나요?
-                    </a>
-                  </StPwSpan> */}
                 </div>
               </StLoginCheck>
               <StLoginButton onClick={onSubmit()}>로그인</StLoginButton>
@@ -262,16 +256,15 @@ const StId = styled.div`
     font-size: 16px;
     line-height: 19px;
     width: 100%;
-  }
-  label {
-    color: #7b858e;
-    position: absolute;
-    bottom: 3px;
-    left: 0;
-    top: 11px;
-    transform-origin: bottom left;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-property: color, bottom, transform;
+    ::placeholder {
+      color: #7b858e;
+
+      bottom: 3px;
+      left: 0;
+      top: 11px;
+      transform-origin: bottom left;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
   }
 `;
 
