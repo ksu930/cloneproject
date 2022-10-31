@@ -55,7 +55,7 @@ export const userSlice = createSlice({
       // sessionStorage.setItem("Access_Token", data.headers.access_token);
       // sessionStorage.setItem("Refresh_Token", data.headers.refresh_token);
       // sessionStorage.setItem("data", data.data.data);
-      alert(`${action.payload.name}님 환영합니다.`);
+      // alert(`${action.payload.name}님 환영합니다.`);
     },
     [__loginUser.rejected]: (state, action) => {
       state.isLoading = false;
