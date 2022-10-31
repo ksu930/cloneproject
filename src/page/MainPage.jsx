@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import MainLayout from "../components/MainLayout";
 
@@ -427,7 +426,7 @@ const StContentBox = styled.div`
 `;
 
 const StMeta = styled.ul`
-  margin-top: 7px;
+  margin-top: 5.5px;
   color: rgb(135, 146, 146);
   line-height: 15px;
   font-size: 12px;

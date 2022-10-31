@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const MainHeader = () => {
+  const navigate = useNavigate();
   return (
     <StHeader>
       <StHeaderContainer>
@@ -113,7 +114,9 @@ const MainHeader = () => {
               <HeaderLoginButton>로그인</HeaderLoginButton>
             )} */}
 
-            <HeaderLoginButton>로그인</HeaderLoginButton>
+            <HeaderLoginButton onClick={() => navigate("/login")}>
+              로그인
+            </HeaderLoginButton>
           </StNavigationListContainer>
         </StNavigationContontainer>
       </StHeaderContainer>
@@ -131,6 +134,11 @@ const MainHeader = () => {
           </StLeftHeader>
         </StSecondNavigationContontainer>
       </StSecondHeaderContainer>
+      <StBanner>
+        <a href="https://talk.op.gg/s/lol/free/5502311">
+          이용약관, 개인정보 처리방침 개정 안내 (11/1)
+        </a>
+      </StBanner>
     </StHeader>
   );
 };
@@ -782,4 +790,24 @@ const StUserSetButton = styled.a`
   border-radius: 0;
   width: 100%;
   padding: 10px 0;
+`;
+const StBanner = styled.div`
+  display: block;
+  width: 100%;
+  color: #202d37;
+  background: #ffb900;
+  a {
+    display: block;
+    margin: 0 auto;
+    text-align: left;
+    box-sizing: border-box;
+    width: 1080px;
+    font-size: 14px;
+    min-height: 40px;
+    line-height: 40px;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+  }
 `;
