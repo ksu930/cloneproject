@@ -25,10 +25,12 @@ const DetailPage=( ) =>{
                                     <div className="article-meta__item_2">추천 0</div>
                                 </div>
                             </div>
+                            {true?
                             <div className="article-action">
                                 <button className="delete-button" type="button">삭제</button>
                                 <button className="edit-button" type="button">수정</button>
                             </div>
+                            : null}
                         </div>
                         <div className="article-content-wrap">
                             <div className="img-box">
@@ -38,7 +40,8 @@ const DetailPage=( ) =>{
                         </div>
                         <div className="article-box">
                             <button type="button" className="like-button">
-                                <span className="like-button-img">추천</span>
+                                {true? <span className="like-button-img"></span>
+                                : <span className="nomal-button-img"></span>}
                                 <span className="like-button-num">0</span>
                             </button>
                         </div>
@@ -81,7 +84,8 @@ const DetailPage=( ) =>{
                             <li className="comment-box">
                                 <div className="comment">
                                     <div className="comment-vote">
-                                        <button type="button" className="comment-like-button"></button>
+                                        {true? <button type="button" className="comment-like-button"></button>
+                                        : <button type="button" className="comment-nomal-button"></button>}
                                         <div className="comment-vote__count">3</div>
                                     </div>
                                     <div className="comment-meta">
@@ -126,7 +130,6 @@ const StDetail = styled.div`
         padding-left: 24px;
         padding-right: 24px;
         padding: 24px 16px;
-        border-bottom: 1px solid #ebeef1;
     }
     .article__title{
         line-height: 36px;
@@ -138,6 +141,7 @@ const StDetail = styled.div`
     }
     .article-meta{
         margin-top: 9px;
+        margin-bottom: 50px;
         line-height: 17px;
         font-size: 14px;
         color: #7b858e;
@@ -241,7 +245,6 @@ const StDetail = styled.div`
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        border-bottom: 1px solid #dddfe4;
         img{
         width: 200px;
         height: 200px;
@@ -282,6 +285,20 @@ const StDetail = styled.div`
     .like-button-img{
         width: 16px;
         height: 16px;
+        background-image: url("https://talk.op.gg/images/icon_vote_up_on@2x.png?19f7f231e2eaaac1b5fee89062be003e.b");
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: 16px;
+        line-height: 999px;
+        vertical-align: top;
+        overflow: hidden;
+        display: inline-block;
+        margin-top: 1px;
+        margin-right: 10px;
+    }
+    .nomal-button-img{
+        width: 16px;
+        height: 16px;
         background-image: url("https://talk.op.gg/images/icon-vote-up@2x.png?205b48be2477942b34439ce176a867fb");
         background-repeat: no-repeat;
         background-position: 0 0;
@@ -291,8 +308,7 @@ const StDetail = styled.div`
         overflow: hidden;
         display: inline-block;
         margin-top: 1px;
-        transition: all .5s;
-        /* background-image: url("https://talk.op.gg/images/icon_vote_up_on@2x.png?19f7f231e2eaaac1b5fee89062be003e."); */
+        margin-right: 10px;
     }
     .like-button-num{
         display: inline-block;
@@ -466,10 +482,28 @@ const StDetail = styled.div`
         top: 12px;
         width: 64px;
         text-align: center;
+        
     }
     .comment-like-button{
             width: 16px;
             height: 16px;
+            background-color: #fff;
+            background-image: url("https://talk.op.gg/images/icon_vote_up_on@2x.png?19f7f231e2eaaac1b5fee89062be003e.b");
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            background-size: 16px;
+            line-height: 999px;
+            vertical-align: top;
+            overflow: hidden;
+            margin-top: 4px;
+            cursor: pointer;
+            border: none;
+            
+    }
+    .comment-nomal-button{
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
             background-image: url("https://talk.op.gg/images/icon-vote-up@2x.png?205b48be2477942b34439ce176a867fb");
             background-repeat: no-repeat;
             background-position: 0 0;

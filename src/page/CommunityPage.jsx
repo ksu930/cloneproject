@@ -72,7 +72,10 @@ const CommunityPage=() =>{
                         <section className="article-list">
                             <article className="article-list-item">
                                 <div className="article-list-item__vote">
-                                    <img src="https://talk.op.gg/images/icon-vote-up.png" alt="" />
+                                    {true?
+                                    <img src="https://talk.op.gg/images/icon_vote_up_on.png" alt="" />
+                                    :<img src="https://talk.op.gg/images/icon-vote-up.png" alt="" />}
+                                    
                                     <div>좋아요 갯수</div>
                                 </div>
                                 <div className="article-list-item__content">
