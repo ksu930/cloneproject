@@ -419,7 +419,7 @@ const StContent = styled.div`
     .article-list-paging-content{
         border-top: 1px solid #ebeef1;
         display: table;
-        width: 100%;
+        width: 696px;
         background: #f8f9fa;
         line-height: 18px;
         font-size: 14px;
