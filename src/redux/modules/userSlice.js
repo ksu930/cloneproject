@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import api from "../../api";
 
 export const __addUsers = createAsyncThunk(
   "users/addUsers",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.post("/api/signup", payload);
+      const data = await api.post("/api/signup", payload);
       if (!data.data.result) {
         alert("회원가입에 실패하였습니다.");
       }
@@ -21,7 +22,7 @@ export const __loginUser = createAsyncThunk(
   "loginUser",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.post("/api/login", payload);
+      const data = await api.post("/api/login", payload);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

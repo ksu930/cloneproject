@@ -1,10 +1,17 @@
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import CommunityLayout from "../components/community/CommunityLayout"
 import Footer from "../components/Footer"
 import Layout from "../components/Layout"
+import { __getPost } from "../redux/modules/postSlice"
 
 const CommunityPage=() =>{
+    const dispatch =useDispatch();
+      useEffect(() => {
+    dispatch(__getPost());
+  }, [dispatch]);
     return(
             <Layout>
                 <CommunityLayout >
