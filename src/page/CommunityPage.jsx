@@ -1,10 +1,17 @@
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import CommunityLayout from "../components/community/CommunityLayout"
 import Footer from "../components/Footer"
 import Layout from "../components/Layout"
+import { __getPost } from "../redux/modules/postSlice"
 
 const CommunityPage=() =>{
+    const dispatch =useDispatch();
+      useEffect(() => {
+    dispatch(__getPost());
+  }, [dispatch]);
     return(
             <Layout>
                 <CommunityLayout >
@@ -72,7 +79,10 @@ const CommunityPage=() =>{
                         <section className="article-list">
                             <article className="article-list-item">
                                 <div className="article-list-item__vote">
-                                    <img src="https://talk.op.gg/images/icon-vote-up.png" alt="" />
+                                    {true?
+                                    <img src="https://talk.op.gg/images/icon_vote_up_on.png" alt="" />
+                                    :<img src="https://talk.op.gg/images/icon-vote-up.png" alt="" />}
+                                    
                                     <div>좋아요 갯수</div>
                                 </div>
                                 <div className="article-list-item__content">

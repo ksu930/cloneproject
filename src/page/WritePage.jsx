@@ -1,33 +1,88 @@
+import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import CommunityLayout from "../components/community/CommunityLayout"
 import Footer from "../components/Footer"
 import Layout from "../components/Layout"
 
 const WritePage=( ) =>{
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const initialState = {
+        title: "",
+        content: "",
+    };
+    const [post, setPost] = useState(initialState);
+    const [imgSave, setImgSave] = useState("");
+
+    const saveFileImage = (e) => {
+        setImgSave(URL.createObjectURL(e.target.files[0]));
+    };
+
+    const onUpLoadHandler = (e) => {
+        const { name, value } = e.target;
+        setPost({ ...post, [name]: value });
+    };
+    
+    const onPostingHandler = (e) => {    
+        e.preventDefault();
+        let formData = new FormData();
+        let postimage = document.getElementById("img_file");
+        formData.append(
+          "postCreateRequestDto",
+          new Blob([JSON.stringify(post)], { type: "application/json" })
+        );
+        formData.append("file", postimage.files[0]);
+        dispatch();
+      };
+      
     return(
         <Layout>
             <CommunityLayout>
-                <StForm>
+                <StForm enctype="multipart/form-data" onSubmit={onPostingHandler}>
                     <div className="article-write">
                         <div className="article-write-header">
                             <div className="article-write__title">글쓰기</div>
                         </div>
                         <div className="article-write-input">
-                            <input type="text" name="title" placeholder="제목" className="article-write__text" />
+                            <input 
+                            className="article-write__text"
+                            type="text" 
+                            name="title" 
+                            value={post.title}
+                            onChange={onUpLoadHandler}
+                            placeholder="제목"
+                            required
+                            />
                         </div>
                         <div className="article-write-input--link">
                             <div className="img_input_box">
                                 <label className="img_input_label" htmlFor="img_file">
                                     내 컴퓨터에서 사진을 선택해주세요.
                                 </label>
-                                <input className="img_input" type="file" id="img_file" accept="image/*"/>
+                                <input 
+                                className="img_input" 
+                                type="file" 
+                                id="img_file" 
+                                accept="image/*"
+                                onChange={saveFileImage}
+                                />
                             </div>
                         </div>
                         <div className="article-write-content">
                             <div className="prev-img-box">
-                            <img className="prev-img" alt="" src="image/no_img.png"/>
+                            <img className="prev-img" alt="" src={imgSave ? imgSave : "image/no_img.png"}/>
                             </div>
-                            <textarea className="comment_input" placeholder="불법촬영물등을 게재할 경우 전기통신사업법 제22조의5제1항에 따라 삭제·접속차단 등의 조치가 취해질 수 있으며 관련 법률에 따라 처벌받을 수 있습니다."></textarea>
+                            <textarea 
+                            className="comment_input" 
+                            type="text" 
+                            name="content" 
+                            value={post.content} 
+                            onChange={onUpLoadHandler}
+                            placeholder="불법촬영물등을 게재할 경우 전기통신사업법 제22조의5제1항에 따라 삭제·접속차단 등의 조치가 취해질 수 있으며 관련 법률에 따라 처벌받을 수 있습니다."
+                            required
+                            />
                         </div>
                     </div>
                     <div className="article-content-banner">
@@ -37,7 +92,7 @@ const WritePage=( ) =>{
                         </span>
                     </div>
                     <div className="article-write-buttons">
-                        <button className="cancle_button" type="button">취소</button>
+                        <button className="cancle_button" type="button" onClick={() => {navigate("/community")}}>취소</button>
                         <button className="submit_button">작성완료</button>
                     </div>
                 </StForm>
@@ -91,6 +146,7 @@ const StForm = styled.form`
         font-size: 16px;
         color: #1e2022;
         box-sizing: border-box;
+        outline: none;
     }
     .article-write-input--link{
         margin-top: 8px;
@@ -160,6 +216,7 @@ const StForm = styled.form`
         min-height: 0px;
         border: none;
         resize: none;
+        outline: none;
         ::placeholder{
             color: grey;
             line-height: 160%;
