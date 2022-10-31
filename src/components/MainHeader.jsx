@@ -1,225 +1,813 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const MainHeader = () => {
+  const navigate = useNavigate();
   return (
-    <div>
-      <Stnav>
-        <StLi>
-          <StImg src="https://s-lol-web.op.gg/images/icon/opgglogo.svg?v=1666684602785"></StImg>
-          <StImgLi>
-            <Stimg src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-lol-white.svg?image=q_auto,f_webp,w_48&v=1666684602785" />
-            <LogoSpan>리그오브레전드</LogoSpan>
-          </StImgLi>
-        </StLi>
-        <StLiList>
-          <StLi>
-            <Img1 src="https://opgg-gnb.akamaized.net/static/images/icons/01-icon-00-logo-icon-opggsquare.svg?image=q_auto,f_webp,w_48&v=1666684602785" />
-            <StA1 href="https://op.gg/desktop/">데스크톱</StA1>
-          </StLi>
-          <StLi>
-            <Img2 src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-valorant-white.svg?image=q_auto,f_webp,w_48&v=1666684602785" />
-            <StA2 href="https://valorant.op.gg/">발로란트</StA2>
-          </StLi>
-          <StLi>
-            <Img3 src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-pubg-gray.svg?image=q_auto,f_webp,w_48&v=1666684602785" />
-            <StA3 href="https://pubg.op.gg">배틀그라운드</StA3>
-          </StLi>
-          <StLi>
-            <Img4 src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-overwatch-gray.svg?image=q_auto,f_webp,w_48&v=1666684602785" />
-            <StA4 href="https://overwStAtch.op.gg">오버워치</StA4>
-          </StLi>
-          <StLi>
-            <Img5 src="https://opgg-gnb.akamaized.net/static/images/icons/img_navi_bs.svg?image=q_auto,f_webp,w_48&v=1666684602785" />
-            <StA5 href="https://er.op.gg">이터널 리턴</StA5>
-          </StLi>
-          <button>로그인</button>
-        </StLiList>
-      </Stnav>
-      <StSubVarBox>
-        <StSubVar>
-          <li className="li1">홈</li>
-          <li className="li2">챔피언 분석</li>
-          <li className="li3">게임 모드</li>
-          <li className="li4">통계</li>
-          <li className="li5">랭킹</li>
-          <li className="li6">프로관전</li>
-          <li className="li7">멀티서치</li>
-          <li className="li8">커뮤니티</li>
-        </StSubVar>
-      </StSubVarBox>
-    </div>
+    <StHeader>
+      <StHeaderContainer>
+        <StLogoContainer>
+          <StLogoLink to="/">
+            <StLogoImg src="https://s-lol-web.op.gg/images/icon/opgglogo.svg?v=1666684602785" />
+          </StLogoLink>
+        </StLogoContainer>
+        <StNavigationContontainer>
+          <StTolkpggContainer>
+            <StTolkpggBox>
+              <StTolkpggSpan>
+                <StTolkpggImg src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-lol-white.svg?image=q_auto,f_webp,w_48&v=1666684602785" />
+              </StTolkpggSpan>
+              리그오브레전드
+            </StTolkpggBox>
+          </StTolkpggContainer>
+          <StNavigationListContainer>
+            <StLolA href="https://op.gg/desktop/">
+              <StLolSpan>
+                <StLolImg
+                  src="https://opgg-gnb.akamaized.net/static/images/icons/01-icon-00-logo-icon-opggsquare.svg?image=q_auto,f_webp,w_48&v=1666684602785"
+                  alt="데스크톱"
+                />
+              </StLolSpan>
+              데스크톱
+            </StLolA>
+            <StValA href="https://valorant.op.gg">
+              <StValSpan>
+                <StValImg
+                  src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-valorant-white.svg"
+                  alt="리그오브레전드"
+                />
+                B
+              </StValSpan>
+              발로란트
+            </StValA>
+            <StPUBGA href="https://pubg.op.gg/">
+              <StPUBGSpan>
+                <StPUBGImg
+                  src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-pubg-gray.svg"
+                  alt="리그오브레전드"
+                />
+              </StPUBGSpan>
+              배틀그라운드
+            </StPUBGA>
+            <StWatchA href="https://overwatch.op.gg/">
+              <StWatchSpan>
+                <StWatchImg
+                  src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-overwatch-gray.svg"
+                  alt="리그오브레전드"
+                />
+              </StWatchSpan>
+              오버워치
+            </StWatchA>
+            <StEternalA href="https://er.op.gg/">
+              <StEternalSpan>
+                <StEternalImg
+                  src="https://opgg-gnb.akamaized.net/static/images/icons/img_navi_bs.svg"
+                  alt="리그오브레전드"
+                />
+              </StEternalSpan>
+              이터널 리턴
+            </StEternalA>
+
+            <StQWERA href="https://qwer.gg/ko">
+              <StQWERSpan>
+                <StQWERImg
+                  src="https://opgg-gnb.akamaized.net/static/images/icons/opgg%20favicon%20white_220107.svg"
+                  alt="리그오브레전드"
+                />
+              </StQWERSpan>
+              QWER (이스포츠 전적)
+            </StQWERA>
+            <StDuoA href="https://talk.op.gg">
+              <StDuoSpan>
+                <StDuoImg
+                  src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-talk-gray.svg?image=q_auto,f_webp,w_48&v=1666684602785"
+                  alt="리그오브레전드"
+                />
+              </StDuoSpan>
+              톡피지지
+            </StDuoA>
+            <StDuoA href="https://duo.op.gg/">
+              <StDuoSpan>
+                <StDuoImg
+                  src="https://opgg-gnb.akamaized.net/static/images/icons/img-navi-duo-gray.svg"
+                  alt="리그오브레전드"
+                />
+              </StDuoSpan>
+              Duo
+            </StDuoA>
+            {/* {false ? (
+              <StHeaderLogoutToggle>
+                <StHeaderLogoutSpan>
+                  닉네임
+                  <StLogoutImg src="https://talk.op.gg/images/icon-gnb-dropdown.png" />
+                </StHeaderLogoutSpan>
+                <StDropdown>
+                  <StDropDownList>
+                    <StDropDownListItem>
+                      <StUserSetButton>계정 설정</StUserSetButton>
+                      <StUserSetButton>로그아웃</StUserSetButton>
+                    </StDropDownListItem>
+                  </StDropDownList>
+                </StDropdown>
+              </StHeaderLogoutToggle>
+            ) : (
+              <HeaderLoginButton>로그인</HeaderLoginButton>
+            )} */}
+
+            <HeaderLoginButton onClick={() => navigate("/login")}>
+              로그인
+            </HeaderLoginButton>
+          </StNavigationListContainer>
+        </StNavigationContontainer>
+      </StHeaderContainer>
+      <StSecondHeaderContainer>
+        <StSecondNavigationContontainer>
+          <StLeftHeader>
+            <StSecondLolA>홈</StSecondLolA>
+            <StSecondPUBGA>챔피언 분석</StSecondPUBGA>
+            <StSecondRainA>게임모드</StSecondRainA>
+            <StSecondRainA>통계</StSecondRainA>
+            <StSecondRainA>랭킹</StSecondRainA>
+            <StSecondRainA>프로관전</StSecondRainA>
+            <StSecondRainA>멀티서치</StSecondRainA>
+            <StSecondWatchA to="/Community">커뮤니티</StSecondWatchA>
+          </StLeftHeader>
+        </StSecondNavigationContontainer>
+      </StSecondHeaderContainer>
+      <StBanner>
+        <a href="https://talk.op.gg/s/lol/free/5502311">
+          이용약관, 개인정보 처리방침 개정 안내 (11/1)
+        </a>
+      </StBanner>
+    </StHeader>
   );
 };
+
 export default MainHeader;
 
-const StImg = styled.img`
-  width: 80px;
-  height: 100%;
-  padding-left: 15px;
-  background-color: #5383e8;
-`;
-const Stimg = styled.img`
-  margin: auto auto auto 20px;
-  width: 24px;
-  height: 24px;
-`;
-const LogoSpan = styled.span`
-  width: 120px;
-  margin: auto -10px auto 10px;
-  font-size: small;
-`;
-
-const StImgLi = styled.li`
-  background-color: #5383e8;
-  height: 40px;
-  display: flex;
-`;
-
-const Stnav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  color: white;
-  height: 40px;
-`;
-
-const StLiList = styled.div`
-  width: 90%;
-  display: flex;
+const StHeader = styled.div`
+  min-height: 40px;
   background-color: #28344e;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  position: sticky;
+  top: 0;
+  word-break: keep-all;
+`;
+const StHeaderContainer = styled.div`
+  background-color: rgb(40, 52, 78);
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  -webkit-box-pack: justify;
   justify-content: space-between;
-  button {
-    background-color: #5383e8;
-    border: 0px;
-    border-radius: 5px;
-    font-size: 12px;
-    color: white;
-    height: 60%;
-    width: 60px;
-    margin: auto 20px;
-  }
-`;
-const StLi = styled.li`
-  list-style: none;
-  display: flex;
-`;
-
-const Img1 = styled.img`
-  width: 24px;
-  height: 24px;
-  margin: auto 10px;
-`;
-const Img2 = styled.img`
-  width: 24px;
-  height: 24px;
-  margin: auto 0px;
-`;
-const Img3 = styled.img`
-  width: 24px;
-  height: 24px;
-  margin: auto 0px;
-`;
-const Img4 = styled.img`
-  width: 24px;
-  height: 24px;
-  margin: auto 0px;
-`;
-const Img5 = styled.img`
-  width: 24px;
-  height: 24px;
-  margin: auto 0px;
-`;
-
-const StA1 = styled.a`
-  text-decoration: none;
-  color: #c3cbd1;
-  margin: auto 0px;
-  font-size: 12px;
-`;
-const StA2 = styled.a`
-  text-decoration: none;
-  color: #c3cbd1;
-  margin: auto 0px;
-  font-size: 12px;
-`;
-const StA3 = styled.a`
-  text-decoration: none;
-  color: #c3cbd1;
-  margin: auto 0px;
-  font-size: 12px;
-`;
-const StA4 = styled.a`
-  text-decoration: none;
-  color: #c3cbd1;
-  margin: auto 0px;
-  font-size: 12px;
-`;
-const StA5 = styled.a`
-  text-decoration: none;
-  color: #c3cbd1;
-  margin: auto 0px;
-  font-size: 12px;
-`;
-
-const StSubVarBox = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
-const StSubVar = styled.nav`
-  background-color: #5383e8;
-  display: flex;
-  width: 1080px;
+  position: relative;
+  box-sizing: border-box;
   height: 40px;
-  padding-left: 30px;
-  margin-top: 10px;
-  justify-content: space-between;
-  .li1 {
-    list-style: none;
-    color: #c3cbd1;
-    font-size: 15px;
+  padding: 0 0 0 98px;
+  vertical-align: baseline;
+`;
+const StLogoContainer = styled.div`
+  margin: 0;
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 98px;
+  background: #5383e8;
+  vertical-align: baseline;
+`;
+const StLogoLink = styled(Link)`
+  text-decoration: none;
+  margin: 0;
+  border: 0;
+  word-break: keep-all;
+  display: block;
+  padding: 12px 0;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  line-height: 0;
+  cursor: pointer;
+`;
+const StNavigationContontainer = styled.div`
+  margin: 0;
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  -webkit-box-flex: 1;
+  flex: 1;
+  display: flex;
+`;
+// margin-right: 120px!important;
+const StLogoImg = styled.img`
+  width: 65px;
+  height: 16px;
+`;
+const StTolkpggContainer = styled.div`
+  margin: 0;
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: relative;
+  display: inline-block;
+  height: 40px;
+  background: #5383e8;
+  color: #fff;
+`;
+const StTolkpggBox = styled.div`
+  margin: 0;
+  border: 0;
+  word-break: keep-all;
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 12px 0 32px;
+  color: #fff;
+  font-size: 12px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  vertical-align: middle;
+`;
+const StTolkpggSpan = styled.span`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+  display: flex;
+`;
+const StTolkpggImg = styled.img`
+  margin: 0;
+  padding: 0;
+  word-break: keep-all;
+  max-width: 100%;
+  border: none;
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+`;
+const StNavigationListContainer = styled.div`
+  margin: 0;
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  -webkit-box-flex: 1;
+  flex: 1;
+  vertical-align: baseline;
+`;
+const StLolA = styled.a`
+  text-decoration: none;
+  display: inline-block;
+  word-break: keep-all;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px 0 40px;
+  color: #c5cbd0;
+  font-size: 12px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin: 4px;
+  vertical-align: middle;
+`;
+const StLolSpan = styled.span`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  display: flex;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+`;
+const StLolImg = styled.img`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  display: flex;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+  vertical-align: middle;
+`;
+const StValA = styled.a`
+  text-decoration: none;
+  display: inline-block;
+  word-break: keep-all;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px 0 40px;
+  color: #c5cbd0;
+  font-size: 12px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin: 4px;
+  vertical-align: middle;
+`;
+const StValSpan = styled.span`
+  border: 0;
+  word-break: keep-all;
+  display: inline-block;
+  border-radius: 9px;
+  height: 16px;
+  padding: 0 6px;
+  margin: 0 4px 0 0;
+  background-color: #ffb900;
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #28344e;
+  vertical-align: middle;
+`;
+const StValImg = styled.img`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  display: flex;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+  vertical-align: middle;
+`;
+const StPUBGA = styled.a`
+  text-decoration: none;
+  display: inline-block;
+  word-break: keep-all;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px 0 40px;
+  color: #c5cbd0;
+  font-size: 12px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin: 4px;
+  vertical-align: middle;
+`;
+const StPUBGSpan = styled.span`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  display: flex;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+`;
+const StPUBGImg = styled.img`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  display: flex;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+  vertical-align: middle;
+`;
+const StWatchA = styled.a`
+  text-decoration: none;
+  display: inline-block;
+  word-break: keep-all;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px 0 40px;
+  color: #c5cbd0;
+  font-size: 12px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin: 4px;
+  vertical-align: middle;
+`;
+const StWatchSpan = styled.span`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  display: flex;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+`;
+const StWatchImg = styled.img`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  display: flex;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+  vertical-align: middle;
+`;
+const StEternalA = styled.a`
+  text-decoration: none;
+  display: inline-block;
+  word-break: keep-all;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px 0 40px;
+  color: #c5cbd0;
+  font-size: 12px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin: 4px;
+  vertical-align: middle;
+`;
+const StEternalSpan = styled.span`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  display: flex;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+`;
+const StEternalImg = styled.img`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  display: flex;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+  vertical-align: middle;
+`;
+const StDuoA = styled.a`
+  text-decoration: none;
+  display: inline-block;
+  word-break: keep-all;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px 0 40px;
+  color: #c5cbd0;
+  font-size: 12px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin: 4px;
+  vertical-align: middle;
+`;
+const StDuoSpan = styled.span`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  display: flex;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+`;
+const StDuoImg = styled.img`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  display: flex;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+  vertical-align: middle;
+`;
+const StQWERA = styled.a`
+  text-decoration: none;
+  display: inline-block;
+  word-break: keep-all;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px 0 40px;
+  color: #c5cbd0;
+  font-size: 12px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin: 4px;
+  vertical-align: middle;
+`;
+const StQWERSpan = styled.span`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  display: flex;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+`;
+const StQWERImg = styled.img`
+  padding: 0;
+  border: 0;
+  word-break: keep-all;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  display: flex;
+  align-content: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0;
+  vertical-align: middle;
+`;
+const StSecondHeaderContainer = styled.div`
+  padding: 0;
+  overflow-x: hidden;
+  overflow: visible;
+  background: #5383e8;
+  border-bottom: 1px solid #5383e8;
+  border: 0;
+  vertical-align: baseline;
+  margin: 0;
+  height: 48px;
+`;
+const StSecondNavigationContontainer = styled.div`
+  max-width: 1044px;
+  margin: 0 auto;
+  display: block;
+  padding: 0;
+  border: 0;
+`;
+const StLeftHeader = styled.div`
+  float: left;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  justify-content: flex-start;
+  align-items: center;
+  width: auto;
+`;
+const StSecondLolA = styled(Link)`
+  display: block;
+  float: left;
+  line-height: 48px;
+  margin-left: 0;
+  position: relative;
+  align-items: center;
+  height: 48px;
+  font-size: 15px;
+  box-sizing: border-box;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+`;
+const StSecondPUBGA = styled.a`
+  display: block;
+  float: left;
+  line-height: 48px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  font-size: 15px;
+  box-sizing: border-box;
+  color: #9aa4af;
+  margin-left: 24px;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  margin-left: 24px;
+`;
+const StSecondWatchA = styled(Link)`
+  display: block;
+  float: left;
+  line-height: 48px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  font-size: 15px;
+  box-sizing: border-box;
+  color: #00fede;
+  margin-left: 24px;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  margin-left: 24px;
+`;
+const StSecondRainA = styled.a`
+  display: block;
+  float: left;
+  line-height: 48px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  font-size: 15px;
+  box-sizing: border-box;
+  color: #9aa4af;
+  margin-left: 24px;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  margin-left: 24px;
+`;
+const HeaderLoginButton = styled.button`
+  font-size: 12px;
+  margin-top: 7px;
+  margin-right: 10px;
+  min-width: 50px;
+  vertical-align: top;
+  text-align: center;
+  line-height: 15px;
+  padding: 8px 0 7px;
+  float: right;
+  color: white;
+  border: 0px;
+  border-radius: 5px;
+  width: 68px;
+  height: 26px;
+  background-color: #5383e8; ;
+`;
+const StHeaderLogoutToggle = styled.button`
+  margin-top: 4px;
+  float: right;
+  background: none;
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  margin: 0;
+  font-size: 14px;
+  outline: 0;
+  appearance: auto;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  border: 0px;
+  flex-direction: column;
+`;
+const StHeaderLogoutSpan = styled.span`
+  font-size: 12px;
+  color: #c3cbd1;
+  position: relative;
+  min-width: 120px;
+  text-align: right;
+  vertical-align: middle;
+  float: right;
+`;
+const StLogoutImg = styled.img`
+  padding: 4px 0 4px 4px;
+  vertical-align: middle;
+`;
+const StDropdown = styled.div`
+  justify-content: left;
+  text-align: left;
+  display: none;
+  top: 40px;
+  right: 5px;
+  position: absolute;
+  width: 160px;
+  box-shadow: 0 4px 12px 0 rgb(0 0 0 / 20%);
+  background-color: #fff;
+  ${StHeaderLogoutToggle}:hover & {
+    display: block;
   }
-  .li2 {
-    margin-left: -60px;
-    list-style: none;
-    color: #c3cbd1;
-    font-size: 15px;
-  }
-  .li3 {
-    margin-left: -60px;
-    list-style: none;
-    color: #c3cbd1;
-    font-size: 15px;
-  }
-  .li4 {
-    margin-left: -60px;
-    list-style: none;
-    color: #c3cbd1;
-    font-size: 15px;
-  }
-  .li5 {
-    margin-left: -60px;
-    list-style: none;
-    color: #c3cbd1;
-    font-size: 15px;
-  }
-  .li6 {
-    margin-left: -60px;
-    list-style: none;
-    color: #c3cbd1;
-    font-size: 15px;
-  }
-  .li7 {
-    margin-left: -60px;
-    list-style: none;
-    color: #c3cbd1;
-    font-size: 15px;
-  }
-  .li8 {
-    margin-left: -60px;
-    list-style: none;
-    color: #c3cbd1;
-    font-size: 15px;
+`;
+const StDropDownList = styled.ul`
+  list-style: none;
+  display: block;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 15px;
+`;
+const StDropDownListItem = styled.li`
+  display: flex;
+  margin: 0;
+  border: 0;
+  vertical-align: baseline;
+  flex-direction: column;
+  justify-content: left;
+`;
+const StUserSetButton = styled.a`
+  box-sizing: border-box;
+  padding: 0;
+  font-size: 14px;
+  color: #1e2022;
+  border: 0;
+  border-radius: 0;
+  width: 100%;
+  padding: 10px 0;
+`;
+const StBanner = styled.div`
+  display: block;
+  width: 100%;
+  color: #202d37;
+  background: #ffb900;
+  a {
+    display: block;
+    margin: 0 auto;
+    text-align: left;
+    box-sizing: border-box;
+    width: 1080px;
+    font-size: 14px;
+    min-height: 40px;
+    line-height: 40px;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
   }
 `;
