@@ -56,27 +56,27 @@ const CommunityLayout = ({children}) =>{
                         <StSidebarContent>
                             <div className="sidebar-menu">
                                 <div className="sidebar-menu__title">홈</div>
-                                <ui className="sidebar-menu__list">
+                                <ul className="sidebar-menu__list">
                                     <li className="sidebar-menu__item ">
                                         <StHomeLink to="/Community">
                                             전체
                                         </StHomeLink>
                                     </li>
-                                </ui>
+                                </ul>
                             </div>
                             <div className="sidebar-menu">
                                 <div className="sidebar-menu__title">정보</div>
-                                <ui className="sidebar-menu__list">
+                                <ul className="sidebar-menu__list">
                                     <li className="sidebar-menu__item ">
                                         <div className="a">OP.GG 기획</div>
                                         <div className="a">유저 뉴스</div>
                                         <div className="a">팁과 노하우</div>
                                     </li>
-                                </ui>
+                                </ul>
                             </div>
                             <div className="sidebar-menu">
                                 <div className="sidebar-menu__title">커뮤니티</div>
-                                <ui className="sidebar-menu__list">
+                                <ul className="sidebar-menu__list">
                                     <li className="sidebar-menu__item ">
                                         <div className="a">자유</div>
                                         <div className="a">유머</div>
@@ -85,7 +85,7 @@ const CommunityLayout = ({children}) =>{
                                         <div className="a">사건 사고</div>
                                         <div className="a">팬 아트</div>
                                     </li>
-                                </ui>
+                                </ul>
                             </div>
                         </StSidebarContent>
                     </StSidebarContentWrap>
