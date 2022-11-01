@@ -12,7 +12,7 @@ const MainPage = () => {
     dispatch(__bestWrite());
   }, [dispatch]);
 
-  const titleList = useSelector((state) => state.post.best.data);
+  const titleList = useSelector((state) => state.post.best?.data);
   console.log("타이틀리스트", titleList);
   return (
     <>

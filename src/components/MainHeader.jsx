@@ -1,13 +1,16 @@
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import { logoutState } from "../redux/modules/userSlice";
 const MainHeader = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const token = sessionStorage.getItem("Access_Token");
   const LogoutButton = () => {
     sessionStorage.removeItem("Access_Token");
     sessionStorage.removeItem("Refresh_Token");
     sessionStorage.removeItem("name");
+    dispatch(logoutState());
     navigate("/");
     alert("로그아웃이 완료되었습니다");
   };
