@@ -28,6 +28,25 @@ export const __postFeed = createAsyncThunk("CREATE_POST", async(payload, thunkAP
       return err;
   }
 });
+//게시글 삭제
+export const __deletePost = createAsyncThunk("DELETE_POST", async(postId, thunkAPI) => {
+  try {
+      await api.delete(`post/${postId}`)
+      return thunkAPI.fulfillWithValue({postId})
+  } catch (err) {
+      return thunkAPI.rejectWithValue(err)
+  }
+});
+//게시글 수정
+export const __editPost = createAsyncThunk("UPDATE_POST", async(payload, thunkAPI) => {
+  try {
+      const res = await api.put(`post/${payload.id}`, payload.editedPost, {
+      })
+      return thunkAPI.fulfillWithValue(res.data.data)
+  } catch (err) {
+      return thunkAPI.rejectWithValue(err)
+  }
+});
 //좋아요
 export const __likePost = createAsyncThunk("LIKE_POST", async(payload, thunkAPI) => {
   try {
@@ -55,9 +74,17 @@ export const __postComment = createAsyncThunk("POST_COMMENT", async(payload, thu
       return err;
   }
 });
+//댓글 삭제
+export const __deleteComment = createAsyncThunk("DELETE_COMMENT", async(payload, thunkAPI) => {
+  try {
+      await api.delete(`post/${payload.postId}/comment/${payload.id}`)
+      return thunkAPI.fulfillWithValue(payload);
+  } catch(err) {
+      return err;
+  }
+});
 
 const initialState = {
-
     posts: [],
     post: {},
     isSuccess: false,
@@ -87,6 +114,17 @@ export const postSlice = createSlice({
       [__postFeed.rejected]: (state, action) => {
           state.isSuccess = action.payload.result;
       },
+      //게시글 삭제
+      [__deletePost.fulfilled]: (state, action) => {
+      },
+      [__deletePost.rejected]: (state, action) => {
+      },
+      //게시글 수정
+      [__editPost.fulfilled]: (state, action) => {
+        state.post = action.payload
+      },
+      [__editPost.rejected]: (state, action) => {
+      },
       //좋아요
       [__likePost.fulfilled]: (state, action) => {
         if(action.payload.code === "ERR_BAD_REQUEST"){
@@ -95,6 +133,7 @@ export const postSlice = createSlice({
         } else{
             const index = state.posts.findIndex(post => post.postId === action.payload.payload)
             const new_post = {...state.posts[index], correctLike: action.payload.data.correctLike, likeNum: action.payload.data.likeNum}
+            state.post = {...state.post, correctLike: action.payload.data.correctLike, likeNum: action.payload.data.likeNum}
             state.posts.splice(index, 1, new_post);
         }
       },
@@ -111,24 +150,18 @@ export const postSlice = createSlice({
       [__postComment.fulfilled]: (state, action) => {
         state.post.comments = action.payload
         state.post.comments = state.post.comments.reverse();
-    },
-    [__postComment.rejected]: (state, action) => {
-    },
+      },
+      [__postComment.rejected]: (state, action) => {
+      },
+      //댓글 삭제
+      [__deleteComment.fulfilled]: (state, action) => {
+        const idx = state.post.comments.findIndex(comment=> comment.id === action.payload.id)
+        state.post.comments.splice(idx, 1)
+      },
+      [__deleteComment.rejected]: (state, action) => {
+      },
     }
 })
 export const { isSuccessFalse } = postSlice.actions
 export default postSlice.reducer;
-=======
-  posts: [],
-  post: {},
-  isloading: true,
-};
 
-export const userSlice = createSlice({
-  name: "USER",
-  initialState,
-  reducers: {},
-  extraReducers: {},
-});
-
-export default userSlice.reducer;

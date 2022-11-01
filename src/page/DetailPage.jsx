@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 import CommunityLayout from "../components/community/CommunityLayout"
 import Footer from "../components/Footer"
 import Layout from "../components/Layout"
-import { __getDetailPost, __postComment } from "../redux/modules/postSlice"
+import { __deletePost, __getDetailPost, __likePost, __postComment } from "../redux/modules/postSlice"
 import Comments from "../components/comment/Comment"
 
 const DetailPage=( ) =>{
     const postId = useParams()
     const id = Number(postId.id)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {post} = useSelector(state=>state.post)
     const [content, setContent] = useState({
         content:""
   });
-
     const onChangeHandler = (e) => {
         const {name, value} = e.target;
         setContent({
@@ -26,7 +26,8 @@ const DetailPage=( ) =>{
 
     useEffect(() => {
         dispatch(__getDetailPost(id));
-      }, [dispatch]);
+    // eslint-disable-next-line
+    }, [dispatch]);
 
     const onAddCommentHandler = (e) => {
         e.preventDefault()
@@ -46,6 +47,17 @@ const DetailPage=( ) =>{
         });
     };
 
+    const onDeletePost = () => {
+        if(window.confirm("글을 삭제하시겠습니까?")){
+            dispatch(__deletePost(id))
+            navigate("/community")
+        } else return;
+      }
+
+      const onClickLikeHandler = (id) =>{
+        dispatch(__likePost(id))
+    }
+    
     return(
         <Layout>
             <CommunityLayout>
@@ -69,22 +81,22 @@ const DetailPage=( ) =>{
                             </div>
                             {post.correctPost?
                             <div className="article-action">
-                                <button className="delete-button" type="button">삭제</button>
-                                <button className="edit-button" type="button">수정</button>
+                                <button className="delete-button" type="button" onClick={onDeletePost}>삭제</button>
+                                <button className="edit-button" type="button" onClick={()=>navigate(`/write/${post.postId}`)}>수정</button>
                             </div>
                             : null}
                         </div>
                         <div className="article-content-wrap">
                             <div className="img-box">
-                                <img src={`${post.img}`} alt=""/>
+                                <img src={`${post.img||post.image}`} alt=""/>
                             </div>
                             <div className="article-content">{post.content}</div>
                         </div>
                         <div className="article-box">
                             <button type="button" className="like-button">
-                                {true? <span className="like-button-img"></span>
-                                : <span className="nomal-button-img"></span>}
-                                <span className="like-button-num">0</span>
+                                {post.correctLike? <span className="like-button-img" onClick={()=>onClickLikeHandler(post.postId)}></span>
+                                : <span className="nomal-button-img" onClick={()=>onClickLikeHandler(post.postId)}></span>}
+                                <span className="like-button-num">{post.likeNum}</span>
                             </button>
                         </div>
                         <div className="article-footer">
