@@ -1,31 +1,73 @@
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useParams } from "react-router-dom"
 import styled from "styled-components"
 import CommunityLayout from "../components/community/CommunityLayout"
 import Footer from "../components/Footer"
 import Layout from "../components/Layout"
+import { __getDetailPost, __postComment } from "../redux/modules/postSlice"
+import Comments from "../components/comment/Comment"
 
 const DetailPage=( ) =>{
+    const postId = useParams()
+    const id = Number(postId.id)
+    const dispatch = useDispatch();
+    const {post} = useSelector(state=>state.post)
+    const [content, setContent] = useState({
+        content:""
+  });
+
+    const onChangeHandler = (e) => {
+        const {name, value} = e.target;
+        setContent({
+            ...content, [name]:value,
+        });
+    };
+
+    useEffect(() => {
+        dispatch(__getDetailPost(id));
+      }, [dispatch]);
+
+    const onAddCommentHandler = (e) => {
+        e.preventDefault()
+        if(!sessionStorage.getItem('Access_Token')){
+        alert("로그인을해야 댓글 작성이 가능합니다.");
+        setContent({
+            content:""
+        });
+        return
+        }
+        if(content.content.trim()==="" ){
+            return alert("댓글을 모두 입력해주세요.");
+        }        
+        dispatch(__postComment({content, id}))
+        setContent({
+            content:""
+        });
+    };
+
     return(
         <Layout>
             <CommunityLayout>
                 <StDetail>
                     <div className="article">
                         <div className="article-header">
-                            <div className="article__title">제목</div>
+                            <div className="article__title">{post.title}</div>
                             <div className="article-meta">
                                 <div className="article-meta-list">
                                     <div className="article-list-item-meta__item">자유</div>
-                                    <div className="article-meta__item">시간</div>
+                                    <div className="article-meta__item">{post.time}</div>
                                     <div className="article-meta__item--name">
                                         <img src="//talk.op.gg/images/tier/icon-level-1.png" alt=""/>
-                                        <span>닉네임</span>
+                                        <span>{post.name}</span>
                                     </div>
                                 </div>
                                 <div className="article-meta-list--right">
-                                    <div className="article-meta__item">댓글 0</div>
-                                    <div className="article-meta__item_2">추천 0</div>
+                                    <div className="article-meta__item">댓글 {post.comments?.length}</div>
+                                    <div className="article-meta__item_2">추천 {post.likeNum}</div>
                                 </div>
                             </div>
-                            {true?
+                            {post.correctPost?
                             <div className="article-action">
                                 <button className="delete-button" type="button">삭제</button>
                                 <button className="edit-button" type="button">수정</button>
@@ -34,9 +76,9 @@ const DetailPage=( ) =>{
                         </div>
                         <div className="article-content-wrap">
                             <div className="img-box">
-                                <img src="image/no_img.png" alt=""/>
+                                <img src={`${post.img}`} alt=""/>
                             </div>
-                            <div className="article-content">33</div>
+                            <div className="article-content">{post.content}</div>
                         </div>
                         <div className="article-box">
                             <button type="button" className="like-button">
@@ -48,67 +90,57 @@ const DetailPage=( ) =>{
                         <div className="article-footer">
                             <img src="https://talk.op.gg/images/icon-share@2x.png" alt=""/>
                             <div>공유하기</div>
-                            <dic>신고</dic>
+                            <div>신고</div>
                         </div>
                     </div>
                     <div className="comment-wrap">
                         <div className="comment-header">
                             <div className="left-box">
                                 <h2 className="left-box-title">댓글</h2>
-                                <div className="left-box-num">총 0 개</div>
+                                <div className="left-box-num">총 {post.comments?.length} 개</div>
                             </div>
                             <div className="right-box">
                                 <div className="right-box-roll">대댓글 펴기</div>
                                 <div className="right-box-reload">새로고침</div>
                             </div>
                         </div>
-                        <form className="comment-write">
-                            <textarea className="comment-write__content" placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."/>
+                        <form className="comment-write" onSubmit={onAddCommentHandler}>
+                            <textarea 
+                            className="comment-write__content"
+                            type="text"
+                            name="content"
+                            value={content.content}
+                            onChange={onChangeHandler}
+                            placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."/>
                             <div className="comment-write-footer">
                                 <button className="comment-write-submit">작성</button>
                             </div>
                         </form>
                     </div>
-                    <div className="comments-wrap">
-                        <div className="comment-sort">
-                            <ul className="comment-sort__list">
-                                <li className="comment-sort__item">
-                                    <button type="button">인기순</button>
-                                </li>
-                                <li className="comment-sort__item--active">
-                                    <button type="button">최신순</button>
-                                </li>
+                    {post.comments?.length !== 0?
+                        <div className="comments-wrap">
+                            <div className="comment-sort">
+                                <ul className="comment-sort__list">
+                                    <li className="comment-sort__item">
+                                        <button type="button">인기순</button>
+                                    </li>
+                                    <li className="comment-sort__item--active">
+                                        <button type="button">최신순</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <ul className="comments-box">
+                            {post.comments?.map((comment)=>{
+                                return (<Comments key={comment.id} comment={comment} postId={id}/>)
+                            })}
                             </ul>
                         </div>
-                        <ul className="comments-box">
-                            <li className="comment-box">
-                                <div className="comment">
-                                    <div className="comment-vote">
-                                        {true? <button type="button" className="comment-like-button"></button>
-                                        : <button type="button" className="comment-nomal-button"></button>}
-                                        <div className="comment-vote__count">3</div>
-                                    </div>
-                                    <div className="comment-meta">
-                                        <div className="comment-title">
-                                            <span className="comment__name">
-                                                <img src="//talk.op.gg/images/tier/icon-level-2.png" alt=""/>
-                                            </span>
-                                            <div>닉네임</div>
-                                            <span className="comment__time">한시간전</span>
-                                        </div>
-                                        <div className="comment-body">댓글</div>
-                                        <div className="comment-bottom">
-                                            <div className="comment-bottom1">신고</div>
-                                            <div className="comment-bottom2">
-                                                <img src="https://talk.op.gg/images/icon-reply@2x.png" alt=""/>
-                                                답글쓰기
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    :
+                        <div className="comment-not">
+                            <img className="comment-not__image" src="https://talk.op.gg/images/icon-comment@3x.png" alt=""/>
+                            <div className="comment-not__message">등록된 댓글이 없습니다.</div>
+                        </div>
+                    }
                 </StDetail>
             </CommunityLayout>
             <Footer/>
@@ -580,5 +612,20 @@ const StDetail = styled.div`
                 margin-right: 8px;
             }
         }
+    }
+    .comment-not{
+        padding: 32px 0;
+        text-align: center;
+        background-color: #fff;
+    }
+    .comment-not__image{
+        width: 40px;
+        height: 40px;
+    }
+    .comment-not__message{
+        margin-top: 8px;
+        line-height: 17px;
+        font-size: 14px;
+        color: #7b858e;
     }
 `

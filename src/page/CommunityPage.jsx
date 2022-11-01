@@ -1,17 +1,30 @@
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
-import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import CommunityLayout from "../components/community/CommunityLayout"
 import Footer from "../components/Footer"
 import Layout from "../components/Layout"
-import { __getPost } from "../redux/modules/postSlice"
+import { __getDetailPost, __getPost, __likePost } from "../redux/modules/postSlice"
 
 const CommunityPage=() =>{
-    const dispatch =useDispatch();
-      useEffect(() => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {posts} = useSelector(state => state.post);
+    console.log(posts)
+
+    useEffect(() => {
     dispatch(__getPost());
-  }, [dispatch]);
+    }, [dispatch]);
+
+    const onClickLikeHandler = (id) =>{
+        dispatch(__likePost(id))
+    }
+
+    const onClickDetailHandler = (id) =>{
+        dispatch(__getDetailPost(id));
+        navigate(`/detail/${id}`);
+    }
     return(
             <Layout>
                 <CommunityLayout >
@@ -77,30 +90,35 @@ const CommunityPage=() =>{
                             </div>
                         </div>
                         <section className="article-list">
-                            <article className="article-list-item">
-                                <div className="article-list-item__vote">
-                                    {true?
-                                    <img src="https://talk.op.gg/images/icon_vote_up_on.png" alt="" />
-                                    :<img src="https://talk.op.gg/images/icon-vote-up.png" alt="" />}
-                                    
-                                    <div>좋아요 갯수</div>
-                                </div>
-                                <div className="article-list-item__content">
-                                    <div className="article-list-item__title">
-                                        <span className="post-title">제목</span>
+                            {posts.map((post)=>(
+                                <article className="article-list-item" key={post.postId}>
+                                    <div className="article-list-item__vote">
+                                        {post.correctLike?
+                                        <img src="https://talk.op.gg/images/icon_vote_up_on.png" alt="" onClick={()=>onClickLikeHandler(post.postId)}/>
+                                        :<img src="https://talk.op.gg/images/icon-vote-up.png" alt="" onClick={()=>onClickLikeHandler(post.postId)}/>}
+                                        <div>{post.likeNum}</div>
                                     </div>
-                                    <div className="article-list-item-meta">
-                                        <div className="article-list-item-meta__item_first">자유</div>
-                                        <div className="article-list-item-meta__item_time">
-                                            <span>시간</span>
+                                    <div className="article-list-item__content" onClick={()=> onClickDetailHandler(post.postId)}>
+                                        <div className="article-list-item__title">
+                                            <span className="post-title">{post.title}</span>
                                         </div>
-                                        <div className="article-list-item-meta__item_img">
-                                            <img src="//talk.op.gg/images/tier/icon-level-1.png" alt=""/>
+                                        <div className="article-list-item-meta">
+                                            <div className="article-list-item-meta__item_first">자유</div>
+                                            <div className="article-list-item-meta__item_time">
+                                                <span>{post.time}</span>
+                                            </div>
+                                            <div className="article-list-item-meta__item_img">
+                                                <img src="//talk.op.gg/images/tier/icon-level-1.png" alt=""/>
+                                            </div>
+                                            <div className="article-list-item-meta__item_name">{post.name}</div>
                                         </div>
-                                        <div className="article-list-item-meta__item_name">닉네임</div>
                                     </div>
-                                </div>
-                            </article>
+                                    <div className="article-list-item-thumbnail" onClick={()=> onClickDetailHandler(post.postId)}>
+                                        <img className="article-list-item__thumbnail" src={`${post.image}`} alt=""/>
+                                    </div>
+                                </article>
+                                )
+                            )}
                         </section>
 
                         <div className="article-list-paging-content">
@@ -349,10 +367,14 @@ const StContent = styled.div`
             font-size: 14px;
             color: #7b858e;
         }
+        img{
+            cursor: pointer;
+        }
     }
     .article-list-item__content{
         vertical-align: middle;
         display: table-cell;
+        cursor: pointer;
     }
     .article-list-item__title{
         display: flex;
@@ -370,6 +392,20 @@ const StContent = styled.div`
         overflow: hidden;
         white-space: nowrap;
         padding-right: 5px;
+    }
+    .article-list-item-thumbnail{
+        width: 93px;
+        padding: 0 24px 0 8px;
+        display: table-cell;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    .article-list-item__thumbnail{
+        width: 93px;
+        height: 60px;
+        display: block;
+        object-fit: cover;
+        font-family: "object-fit: cover;";
     }
     .article-list-item-meta{
         display: block;

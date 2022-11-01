@@ -1,18 +1,18 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "13.124.216.20:8080",
+    baseURL: "http://13.124.216.20:8080/api",
 })
 
 api.interceptors.request.use(
     function (config) {
       if (
-        config.url !== "/login" ||
-        config.url !== "/signup" ||
-        config.url !== "/id-duplicate" ||
-        config.url !== "/name-duplicate" ||
-        config.url !== "/best"
-        ) {config.headers.accessToken = localStorage.getItem("accessToken");}
+        config.url !== "login" ||
+        config.url !== "signup" ||
+        config.url !== "id-duplicate" ||
+        config.url !== "name-duplicate" ||
+        config.url !== "best"
+        ) {config.headers.Authorization = `Bearer ${sessionStorage.getItem("Access_Token")}`}
       return config;
     },
     function (error) {

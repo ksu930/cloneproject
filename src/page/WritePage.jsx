@@ -5,6 +5,7 @@ import styled from "styled-components"
 import CommunityLayout from "../components/community/CommunityLayout"
 import Footer from "../components/Footer"
 import Layout from "../components/Layout"
+import { __postFeed } from "../redux/modules/postSlice"
 
 const WritePage=( ) =>{
     const dispatch = useDispatch();
@@ -25,7 +26,8 @@ const WritePage=( ) =>{
         setPost({ ...post, [name]: value });
     };
     
-    const onPostingHandler = (e) => {    
+    const onPostingHandler = (e) => {
+
         e.preventDefault();
         let formData = new FormData();
         let postimage = document.getElementById("img_file");
@@ -34,7 +36,7 @@ const WritePage=( ) =>{
           new Blob([JSON.stringify(post)], { type: "application/json" })
         );
         formData.append("file", postimage.files[0]);
-        dispatch();
+        dispatch(__postFeed(formData));
       };
       
     return(
