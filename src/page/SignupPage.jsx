@@ -1,9 +1,15 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { __addUsers } from "../redux/modules/userSlice";
-// import {overlapEmail, overlapName, __addUser,__nameCheck,__emailCheck } from
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import {
+  overlapEmailCheck,
+  overlapNameCheck,
+  __addUsers,
+  __nameCheck,
+  __emailCheck,
+} from "../redux/modules/userSlice";
+
 const SignupPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -14,9 +20,15 @@ const SignupPage = () => {
     name: "",
   };
 
-  // const  {overlapEmail,overlapName}
-
+  const { overlapEmail, overlapName } = useSelector((state) => state.user);
+  const [emailCheck, setEmailCheck] = useState(false);
+  const [pwCheck, setPwCheck] = useState(false);
   const [user, setUser] = useState(initialState);
+
+  const regPw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+  const regEmail =
+    /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
     setUser({
@@ -25,9 +37,52 @@ const SignupPage = () => {
     });
   };
 
+  //이메일 중복검사
+  const EmailCk = () => {
+    if (emailCheck === true) {
+      dispatch(__emailCheck({ email: user.email }));
+    }
+  };
+
+  //닉네임 중복검사
+  const NameCk = () => {
+    if (user.name.trim() === "") {
+      //alert("닉네임을 입력해주세요!") 밑에 경고문 띄우기
+    }
+    dispatch(__nameCheck({ name: user.name }));
+  };
+
+  useEffect(() => {
+    if (regEmail.test(user.email)) {
+      setEmailCheck(true);
+    } else {
+      setEmailCheck(false);
+    }
+    dispatch(overlapEmailCheck());
+  }, [user.email]);
+
+  useEffect(() => {
+    if (regPw.test(user.password)) {
+      setPwCheck(true);
+    } else {
+      setPwCheck(false);
+    }
+  }, [user.password]);
+
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(__addUsers(user));
+    if (!pwCheck) {
+      alert("비밀번호를 형식에 맞게 입력해주세요.");
+    } else if (!emailCheck) {
+      alert("이메일을 형식에 맞게 입력해주세요.");
+    }
+    dispatch(
+      __addUsers({
+        email: user.email,
+        password: user.password,
+        name: user.name,
+      })
+    );
     setUser(initialState);
   };
 
@@ -55,9 +110,10 @@ const SignupPage = () => {
                     </div>
                     <div className="inputState">
                       <input
+                        onBlur={EmailCk}
                         className="idInput"
                         type="text"
-                        autocomplete="off"
+                        autoComplete="off"
                         name="email"
                         value={user.email}
                         onChange={onChangeHandler}
@@ -65,8 +121,20 @@ const SignupPage = () => {
                       ></input>
                     </div>
                     <StNameInput>
+                      <div>
+                        {emailCheck ? (
+                          <div style={{ color: "blue" }}>
+                            형식에 맞는 이메일 입니다.
+                          </div>
+                        ) : (
+                          <div style={{ color: "red" }}>
+                            이메일이 형식에 맞지 않습니다.
+                          </div>
+                        )}
+                      </div>
                       <div className="inputState">
                         <input
+                          onBlur={NameCk}
                           className="IdInput"
                           type="text"
                           name="name"
@@ -90,6 +158,18 @@ const SignupPage = () => {
                           placeholder="비밀번호"
                         />
                       </StPwBox>
+                      <div>
+                        {pwCheck ? (
+                          <div style={{ color: "blue" }}>
+                            올바른 비밀번호입니다.
+                          </div>
+                        ) : (
+                          <div style={{ color: "red" }}>
+                            비밀번호가 형식에 맞지 않습니다.
+                          </div>
+                        )}
+                      </div>
+
                       <StSignUpButtonBox>
                         <button className="canCle">취소</button>
                         <button className="signUpBtn" onClick={onSubmit}>
@@ -113,7 +193,7 @@ const SignupPage = () => {
 };
 export default SignupPage;
 
-const StBody = styled.body`
+const StBody = styled.div`
   width: 100%;
   height: 100%;
   font-size: 14px;

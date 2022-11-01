@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import React, { useState } from "react";
 import { __loginUser } from "../redux/modules/userSlice";
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const initialState = {
     email: "",
     password: "",
@@ -19,8 +21,9 @@ const LoginPage = () => {
       [name]: value,
     });
   };
-  const onSubmit = () => {
-    dispatch(__loginUser);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(__loginUser(loginUser));
   };
   return (
     <StLayOut>
@@ -71,20 +74,20 @@ const LoginPage = () => {
                     value={loginUser.password}
                     onChange={onChangeHandler}
                     type="password"
-                    autocomplete="off"
+                    autoComplete="off"
                     placeholder="비밀번호"
                   />
                 </StId>
               </div>
               <StLoginCheck>
                 <div>
-                  <span class=" member__Checkbox member__Checkbox--Checked ">
+                  <span className=" member__Checkbox member__Checkbox--Checked ">
                     <input className="checkbox" type="checkbox" />
                   </span>
                   <label>로그인 상태 유지하기</label>
                 </div>
               </StLoginCheck>
-              <StLoginButton onClick={onSubmit()}>로그인</StLoginButton>
+              <StLoginButton onClick={onSubmit}>로그인</StLoginButton>
               <StSignUp>
                 OP.GG에 처음이세요?
                 <span>

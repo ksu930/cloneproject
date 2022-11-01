@@ -3,6 +3,13 @@ import styled from "styled-components";
 
 const MainHeader = () => {
   const navigate = useNavigate();
+  const token = sessionStorage.getItem("Access_Token");
+  const LogoutButton = () => {
+    sessionStorage.removeItem("Access_Token");
+    sessionStorage.removeItem("Refresh_Token");
+    navigate("/");
+    alert("로그아웃이 완료되었습니다");
+  };
   return (
     <StHeader>
       <StHeaderContainer>
@@ -95,7 +102,7 @@ const MainHeader = () => {
               </StDuoSpan>
               Duo
             </StDuoA>
-            {/* {false ? (
+            {token ? (
               <StHeaderLogoutToggle>
                 <StHeaderLogoutSpan>
                   닉네임
@@ -105,23 +112,23 @@ const MainHeader = () => {
                   <StDropDownList>
                     <StDropDownListItem>
                       <StUserSetButton>계정 설정</StUserSetButton>
-                      <StUserSetButton>로그아웃</StUserSetButton>
+                      <StUserSetButton onClick={LogoutButton}>
+                        로그아웃
+                      </StUserSetButton>
                     </StDropDownListItem>
                   </StDropDownList>
                 </StDropdown>
               </StHeaderLogoutToggle>
             ) : (
-              <HeaderLoginButton>로그인</HeaderLoginButton>
-            )} */}
-
-            <HeaderLoginButton onClick={() => navigate("/login")}>
-              로그인
-            </HeaderLoginButton>
+              <HeaderLoginButton onClick={() => navigate("/login")}>
+                로그인
+              </HeaderLoginButton>
+            )}
           </StNavigationListContainer>
         </StNavigationContontainer>
       </StHeaderContainer>
       <StSecondHeaderContainer>
-        <StSecondNavigationContontainer>
+        <StSecondNavigationContentainer>
           <StLeftHeader>
             <StSecondLolA>홈</StSecondLolA>
             <StSecondPUBGA>챔피언 분석</StSecondPUBGA>
@@ -132,7 +139,7 @@ const MainHeader = () => {
             <StSecondRainA>멀티서치</StSecondRainA>
             <StSecondWatchA to="/Community">커뮤니티</StSecondWatchA>
           </StLeftHeader>
-        </StSecondNavigationContontainer>
+        </StSecondNavigationContentainer>
       </StSecondHeaderContainer>
       <StBanner>
         <a href="https://talk.op.gg/s/lol/free/5502311">
@@ -610,7 +617,7 @@ const StSecondHeaderContainer = styled.div`
   margin: 0;
   height: 48px;
 `;
-const StSecondNavigationContontainer = styled.div`
+const StSecondNavigationContentainer = styled.div`
   max-width: 1044px;
   margin: 0 auto;
   display: block;
@@ -713,7 +720,8 @@ const HeaderLoginButton = styled.button`
   border-radius: 5px;
   width: 68px;
   height: 26px;
-  background-color: #5383e8; ;
+  background-color: #5383e8;
+  cursor: pointer;
 `;
 const StHeaderLogoutToggle = styled.button`
   margin-top: 4px;
