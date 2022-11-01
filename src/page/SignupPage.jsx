@@ -59,6 +59,7 @@ const SignupPage = () => {
       setEmailCheck(false);
     }
     dispatch(overlapEmailCheck());
+    // eslint-disable-next-line
   }, [user.email]);
 
   useEffect(() => {
@@ -67,6 +68,7 @@ const SignupPage = () => {
     } else {
       setPwCheck(false);
     }
+    // eslint-disable-next-line
   }, [user.password]);
 
   const onSubmit = (e) => {

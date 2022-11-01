@@ -2,7 +2,11 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { loginState, __loginUser } from "../redux/modules/userSlice";
+import {
+  loginState,
+  logoutState,
+  __loginUser,
+} from "../redux/modules/userSlice";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -22,14 +26,16 @@ const LoginPage = () => {
     });
   };
 
-  // useEffect(() => {
-  //   if (isLogin) {
-  //     navigate("/");
-  //     dispatch(loginState());
-  //   } else {
-  //     navigate("/login");
-  //   }
-  // }, [isLogin]);
+  useEffect(() => {
+    if (isLogin) {
+      navigate("/");
+      dispatch(loginState());
+    } else {
+      navigate("/login");
+      dispatch(logoutState());
+    }
+    // eslint-disable-next-line
+  }, [isLogin]);
 
   const onSubmit = (e) => {
     e.preventDefault();

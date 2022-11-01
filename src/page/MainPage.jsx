@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import MainLayout from "../components/MainLayout";
+import { __bestWrite } from "../redux/modules/postSlice";
 
 const MainPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(__bestWrite());
+  }, [dispatch]);
+
+  const titleList = useSelector((state) => state.post.best.data);
+  console.log("타이틀리스트", titleList);
   return (
     <>
       <MainLayout>
@@ -36,86 +47,24 @@ const MainPage = () => {
         </StInputBox>
         <StListBox>
           <StTitle>OP.GG Talk 인기글</StTitle>
-          <StArticle>
-            <StBox>
-              <div className="title">1</div>
-              <StTitleImg src="https://opgg-com-image.akamaized.net/attach/images/20221029031554.1704113.jpg"></StTitleImg>
-              <StContentBox>
-                <div className="content">
-                  <span className="miniTitle">멍청한 사람과 논쟁하는 느낌</span>
-                  <span className="like">[40]</span>
-                </div>
-                <StMeta>
-                  <li>10시간 전</li>
-                  <li className="nickname">삼각탈출</li>
-                </StMeta>
-              </StContentBox>
-            </StBox>
-          </StArticle>
-          <StArticle>
-            <StBox>
-              <div className="title">2</div>
-              <StTitleImg src="https://opgg-com-image.akamaized.net/attach/images/20221029031554.1704113.jpg"></StTitleImg>
-              <StContentBox>
-                <div className="content">
-                  <span className="miniTitle">멍청한 사람과 논쟁하는 느낌</span>
-                  <span className="like">[40]</span>
-                </div>
-                <StMeta>
-                  <li>10시간 전</li>
-                  <li className="nickname">삼각탈출</li>
-                </StMeta>
-              </StContentBox>
-            </StBox>
-          </StArticle>
-          <StArticle>
-            <StBox>
-              <div className="title">3</div>
-              <StTitleImg src="https://opgg-com-image.akamaized.net/attach/images/20221029031554.1704113.jpg"></StTitleImg>
-              <StContentBox>
-                <div className="content">
-                  <span className="miniTitle">멍청한 사람과 논쟁하는 느낌</span>
-                  <span className="like">[40]</span>
-                </div>
-                <StMeta>
-                  <li>10시간 전</li>
-                  <li className="nickname">삼각탈출</li>
-                </StMeta>
-              </StContentBox>
-            </StBox>
-          </StArticle>
-          <StArticle>
-            <StBox>
-              <div className="title">4</div>
-              <StTitleImg src="https://opgg-com-image.akamaized.net/attach/images/20221029031554.1704113.jpg"></StTitleImg>
-              <StContentBox>
-                <div className="content">
-                  <span className="miniTitle">멍청한 사람과 논쟁하는 느낌</span>
-                  <span className="like">[40]</span>
-                </div>
-                <StMeta>
-                  <li>10시간 전</li>
-                  <li className="nickname">삼각탈출</li>
-                </StMeta>
-              </StContentBox>
-            </StBox>
-          </StArticle>
-          <StArticle>
-            <StBox>
-              <div className="title">5</div>
-              <StTitleImg src="https://opgg-com-image.akamaized.net/attach/images/20221029031554.1704113.jpg"></StTitleImg>
-              <StContentBox>
-                <div className="content">
-                  <span className="miniTitle">멍청한 사람과 논쟁하는 느낌</span>
-                  <span className="like">[40]</span>
-                </div>
-                <StMeta>
-                  <li>10시간 전</li>
-                  <li className="nickname">삼각탈출</li>
-                </StMeta>
-              </StContentBox>
-            </StBox>
-          </StArticle>
+          {titleList?.map((titleList, idx) => (
+            <StArticle onClick={() => navigate(`/detail/${titleList.postId}`)}>
+              <StBox>
+                <div className="title">{idx + 1}</div>
+                <StTitleImg src={`${titleList.img}`}></StTitleImg>
+                <StContentBox>
+                  <div className="content">
+                    <span className="miniTitle">{titleList.title}</span>
+                    <span className="like">[{titleList.commentsNum}]</span>
+                  </div>
+                  <StMeta>
+                    <li>{titleList.time}</li>
+                    <li className="nickname">{titleList.name}</li>
+                  </StMeta>
+                </StContentBox>
+              </StBox>
+            </StArticle>
+          ))}
         </StListBox>
         <StFinamDiv>
           <StFinalDiv>

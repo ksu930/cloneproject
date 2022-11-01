@@ -158,5 +158,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { overlapEmailCheck, overlapNameCheck, logoutState, loginState } = userSlice.actions;
+export const { overlapEmailCheck, overlapNameCheck, logoutState, loginState } =
+  userSlice.actions;
 export default userSlice.reducer;

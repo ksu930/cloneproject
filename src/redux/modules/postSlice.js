@@ -1,13 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../api";
 
+//인기 게시글 조회
+export const __bestWrite = createAsyncThunk(
+  "GET_BEST_WRITE",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await api.get("best");
+      return thunkAPI.fulfillWithValue(data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
 //전체 게시글 조회
 export const __getPost = createAsyncThunk(
   "post/getPost",
   async (_, thunkAPI) => {
     try {
-
-      const {data} = await api.get("post").then(res=>res.data)
+      const { data } = await api.get("post").then((res) => res.data);
 
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -16,16 +28,19 @@ export const __getPost = createAsyncThunk(
   }
 );
 //게시글 작성
-export const __postFeed = createAsyncThunk("CREATE_POST", async(payload, thunkAPI) => {
-  try {
+export const __postFeed = createAsyncThunk(
+  "CREATE_POST",
+  async (payload, thunkAPI) => {
+    try {
       const res = await api.post("post", payload, {
-          headers: {
-              'Content-Type': 'multipart/form-data',
-          }
-      })
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return thunkAPI.fulfillWithValue(res);
-  } catch(err) {
+    } catch (err) {
       return err;
+    }
   }
 });
 //게시글 삭제
@@ -48,30 +63,41 @@ export const __editPost = createAsyncThunk("UPDATE_POST", async(payload, thunkAP
   }
 });
 //좋아요
-export const __likePost = createAsyncThunk("LIKE_POST", async(payload, thunkAPI) => {
-  try {
-      const {data} = await api.post(`post/${payload}/like`).then(res=>res.data)
-      return thunkAPI.fulfillWithValue({data, payload});
-  } catch(err) {
+export const __likePost = createAsyncThunk(
+  "LIKE_POST",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await api
+        .post(`post/${payload}/like`)
+        .then((res) => res.data);
+      return thunkAPI.fulfillWithValue({ data, payload });
+    } catch (err) {
       return err;
+    }
   }
-})
+);
 //게시글 상세 페이지 조회
-export const __getDetailPost = createAsyncThunk("GET_DETAIL_POST", async(postId, thunkAPI) => {
-  try {
+export const __getDetailPost = createAsyncThunk(
+  "GET_DETAIL_POST",
+  async (postId, thunkAPI) => {
+    try {
       const res = await api.get(`post/${postId}`);
       return thunkAPI.fulfillWithValue(res.data);
-  } catch(err) {
+    } catch (err) {
       return thunkAPI.rejectWithValue(err);
+    }
   }
-});
+);
 //댓글 등록
-export const __postComment = createAsyncThunk("POST_COMMENT", async(payload, thunkAPI) => {
-  try {
-      const res = await api.post(`post/${payload.id}/comment`, payload.content)
+export const __postComment = createAsyncThunk(
+  "POST_COMMENT",
+  async (payload, thunkAPI) => {
+    try {
+      const res = await api.post(`post/${payload.id}/comment`, payload.content);
       return thunkAPI.fulfillWithValue(res.data.data);
-  } catch(err) {
+    } catch (err) {
       return err;
+    }
   }
 });
 //댓글 삭제
