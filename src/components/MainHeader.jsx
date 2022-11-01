@@ -7,6 +7,7 @@ const MainHeader = () => {
   const LogoutButton = () => {
     sessionStorage.removeItem("Access_Token");
     sessionStorage.removeItem("Refresh_Token");
+    sessionStorage.removeItem("name");
     navigate("/");
     alert("로그아웃이 완료되었습니다");
   };

@@ -97,9 +97,9 @@ export const userSlice = createSlice({
     logoutState: (state) => {
       state.isLogin = false;
     },
-    loginState:(state)=>{
+    loginState: (state) => {
       state.isLogin = true;
-  },
+    },
   },
   extraReducers: {
     [__addUsers.fulfilled]: (state, action) => {
@@ -133,7 +133,6 @@ export const userSlice = createSlice({
     },
     [__emailCheck.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("-=======", action.payload);
       if (action.payload.data.result) {
         state.overlapEmail = true;
       } else {

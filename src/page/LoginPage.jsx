@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import React, { useState } from "react";
-import { __loginUser } from "../redux/modules/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { loginState, __loginUser } from "../redux/modules/userSlice";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const { isLogin } = useSelector((state) => state.user);
   const initialState = {
     email: "",
     password: "",
@@ -21,6 +21,16 @@ const LoginPage = () => {
       [name]: value,
     });
   };
+
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     navigate("/");
+  //     dispatch(loginState());
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // }, [isLogin]);
+
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(__loginUser(loginUser));

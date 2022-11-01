@@ -6,7 +6,9 @@ export const __getPost = createAsyncThunk(
   "post/getPost",
   async (_, thunkAPI) => {
     try {
+
       const {data} = await api.get("post").then(res=>res.data)
+
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -55,6 +57,7 @@ export const __postComment = createAsyncThunk("POST_COMMENT", async(payload, thu
 });
 
 const initialState = {
+
     posts: [],
     post: {},
     isSuccess: false,
@@ -115,3 +118,17 @@ export const postSlice = createSlice({
 })
 export const { isSuccessFalse } = postSlice.actions
 export default postSlice.reducer;
+=======
+  posts: [],
+  post: {},
+  isloading: true,
+};
+
+export const userSlice = createSlice({
+  name: "USER",
+  initialState,
+  reducers: {},
+  extraReducers: {},
+});
+
+export default userSlice.reducer;
