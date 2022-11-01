@@ -1,14 +1,16 @@
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 const CommunityLayout = ({children}) =>{
+    const {isLogin} = useSelector(state=>state.user)
     return(
         <Stcontent>
             <StSidebar>
                 <StSidebarInner>
                     <StSidebarContentWrap>
                         <StSidebarContentHeader>
-                            {false ?
+                            {isLogin ?
                             <>
                             <div className="account-info">
                                 <span className="account__tier">

@@ -97,6 +97,9 @@ export const userSlice = createSlice({
     logoutState: (state) => {
       state.isLogin = false;
     },
+    loginState:(state)=>{
+      state.isLogin = true;
+  },
   },
   extraReducers: {
     [__addUsers.fulfilled]: (state, action) => {
@@ -156,5 +159,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { overlapEmailCheck, overlapNameCheck } = userSlice.actions;
+export const { overlapEmailCheck, overlapNameCheck, logoutState, loginState } = userSlice.actions;
 export default userSlice.reducer;

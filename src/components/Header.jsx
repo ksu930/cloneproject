@@ -1,21 +1,34 @@
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import { loginState, logoutState } from "../redux/modules/userSlice";
 
 const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    const {isLogin} = useSelector(state=>state.user)
+console.log(isLogin)
     const onLogoutHandler = () => {
+        console.log("로그아웃핸들러")
         sessionStorage.removeItem('Access_Token');
         sessionStorage.removeItem('name')
         sessionStorage.removeItem('Refresh_Token')
-            
         if(window.location.pathname==="/write"){
             alert("새글을 작성하기 위해 로그인 해주세요.")
-            navigate("/login")
         }
+        dispatch(logoutState())
     };
+
+    useEffect(() => {
+        if(sessionStorage.getItem('Access_Token')){
+            dispatch(loginState())
+            } else {
+            dispatch(logoutState())
+            }
+    
+    },)
+
     return(
         <StHeader>
             <StHeaderContainer>
@@ -77,7 +90,7 @@ const Header = () => {
                             </StQWERSpan>
                             QWER (Esports Data)
                         </StQWERA>
-                        {sessionStorage.getItem('Access_Token')? 
+                        {isLogin? 
                         <StHeaderLogoutToggle>
                             <StHeaderLogoutSpan>
                                 {sessionStorage.getItem('name')}
@@ -92,7 +105,8 @@ const Header = () => {
                                 </StDropDownList>
                             </StDropdown>
                         </StHeaderLogoutToggle>
-                        :<HeaderLoginButton onClick={() => navigate("/login")}>로그인</HeaderLoginButton>}
+                        :<HeaderLoginButton onClick={() => navigate("/login")}>로그인</HeaderLoginButton>
+                        }
                     </StNavigationListContainer>    
                 </StNavigationContontainer>
             </StHeaderContainer>

@@ -60,10 +60,14 @@ const initialState = {
     isSuccess: false,
   };
 
-export const userSlice = createSlice({
+export const postSlice = createSlice({
     name: "USER",
     initialState,
-    reducers: {},
+    reducers: {
+      isSuccessFalse:(state)=>{
+        state.isSuccess = false;
+    }
+    },
     extraReducers: {
       //전체 게시글 조회
       [__getPost.fulfilled]: (state, action) => {
@@ -73,8 +77,9 @@ export const userSlice = createSlice({
       },
       //게시글 작성
       [__postFeed.fulfilled]: (state, action) => {
-          state.posts = [...state.posts, action.payload.data];
-          state.isSuccess = action.payload.result;
+          state.posts = [...state.posts, action.payload.data.data];
+          state.post = action.payload.data.data
+          state.isSuccess = action.payload.data.result;
       },
       [__postFeed.rejected]: (state, action) => {
           state.isSuccess = action.payload.result;
@@ -103,11 +108,10 @@ export const userSlice = createSlice({
       [__postComment.fulfilled]: (state, action) => {
         state.post.comments = action.payload
         state.post.comments = state.post.comments.reverse();
-        alert("댓글등록이 완료되었습니다.")
     },
     [__postComment.rejected]: (state, action) => {
     },
     }
 })
-
-export default userSlice.reducer;
+export const { isSuccessFalse } = postSlice.actions
+export default postSlice.reducer;

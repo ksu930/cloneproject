@@ -11,7 +11,6 @@ const CommunityPage=() =>{
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {posts} = useSelector(state => state.post);
-    console.log(posts)
 
     useEffect(() => {
     dispatch(__getPost());
