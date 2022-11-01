@@ -1,19 +1,21 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import CommunityLayout from "../components/community/CommunityLayout"
 import Footer from "../components/Footer"
 import Layout from "../components/Layout"
+import { isSuccessFalse, __getDetailPost, __postFeed } from "../redux/modules/postSlice"
 
 const WritePage=( ) =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {isSuccess, post} = useSelector(state=>state.post)
     const initialState = {
         title: "",
         content: "",
     };
-    const [post, setPost] = useState(initialState);
+    const [new_post, setNew_Post] = useState(initialState);
     const [imgSave, setImgSave] = useState("");
 
     const saveFileImage = (e) => {
@@ -22,20 +24,28 @@ const WritePage=( ) =>{
 
     const onUpLoadHandler = (e) => {
         const { name, value } = e.target;
-        setPost({ ...post, [name]: value });
+        setNew_Post({ ...new_post, [name]: value });
     };
     
-    const onPostingHandler = (e) => {    
+    const onPostingHandler = (e) => {
         e.preventDefault();
         let formData = new FormData();
         let postimage = document.getElementById("img_file");
         formData.append(
           "postCreateRequestDto",
-          new Blob([JSON.stringify(post)], { type: "application/json" })
+          new Blob([JSON.stringify(new_post)], { type: "application/json" })
         );
         formData.append("file", postimage.files[0]);
-        dispatch();
+        dispatch(__postFeed(formData));
       };
+
+      useEffect(()=>{
+        if(isSuccess){
+          dispatch(__getDetailPost(post.postId));
+          navigate(`/detail/${post.postId}`)
+          dispatch(isSuccessFalse())
+        }
+      },[onPostingHandler])
       
     return(
         <Layout>
@@ -50,7 +60,7 @@ const WritePage=( ) =>{
                             className="article-write__text"
                             type="text" 
                             name="title" 
-                            value={post.title}
+                            value={new_post.title}
                             onChange={onUpLoadHandler}
                             placeholder="제목"
                             required
@@ -78,7 +88,7 @@ const WritePage=( ) =>{
                             className="comment_input" 
                             type="text" 
                             name="content" 
-                            value={post.content} 
+                            value={new_post.content} 
                             onChange={onUpLoadHandler}
                             placeholder="불법촬영물등을 게재할 경우 전기통신사업법 제22조의5제1항에 따라 삭제·접속차단 등의 조치가 취해질 수 있으며 관련 법률에 따라 처벌받을 수 있습니다."
                             required

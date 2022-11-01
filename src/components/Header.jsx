@@ -1,7 +1,34 @@
-import { Link } from "react-router-dom"
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import { loginState, logoutState } from "../redux/modules/userSlice";
 
 const Header = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {isLogin} = useSelector(state=>state.user)
+console.log(isLogin)
+    const onLogoutHandler = () => {
+        console.log("로그아웃핸들러")
+        sessionStorage.removeItem('Access_Token');
+        sessionStorage.removeItem('name')
+        sessionStorage.removeItem('Refresh_Token')
+        if(window.location.pathname==="/write"){
+            alert("새글을 작성하기 위해 로그인 해주세요.")
+        }
+        dispatch(logoutState())
+    };
+
+    useEffect(() => {
+        if(sessionStorage.getItem('Access_Token')){
+            dispatch(loginState())
+            } else {
+            dispatch(logoutState())
+            }
+    
+    },)
+
     return(
         <StHeader>
             <StHeaderContainer>
@@ -63,22 +90,23 @@ const Header = () => {
                             </StQWERSpan>
                             QWER (Esports Data)
                         </StQWERA>
-                        {true? 
+                        {isLogin? 
                         <StHeaderLogoutToggle>
                             <StHeaderLogoutSpan>
-                                닉네임
+                                {sessionStorage.getItem('name')}
                                 <StLogoutImg src="https://talk.op.gg/images/icon-gnb-dropdown.png"/>
                             </StHeaderLogoutSpan>
                             <StDropdown>
                                 <StDropDownList>
                                     <StDropDownListItem>
                                         <StUserSetButton>계정 설정</StUserSetButton>
-                                        <StUserSetButton>로그아웃</StUserSetButton>
+                                        <StUserSetButton onClick={onLogoutHandler}>로그아웃</StUserSetButton>
                                     </StDropDownListItem>
                                 </StDropDownList>
                             </StDropdown>
                         </StHeaderLogoutToggle>
-                        :<HeaderLoginButton>로그인</HeaderLoginButton>}
+                        :<HeaderLoginButton onClick={() => navigate("/login")}>로그인</HeaderLoginButton>
+                        }
                     </StNavigationListContainer>    
                 </StNavigationContontainer>
             </StHeaderContainer>
