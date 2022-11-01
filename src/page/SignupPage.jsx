@@ -312,7 +312,7 @@ const StNameInput = styled.div`
       line-height: 19px;
       width: 100%;
       color: #7b858e;
-      position: absolute;
+
       bottom: 3px;
       left: 0;
       top: 11px;
