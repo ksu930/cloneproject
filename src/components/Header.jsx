@@ -8,7 +8,7 @@ const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {isLogin} = useSelector(state=>state.user)
-console.log(isLogin)
+    
     const onLogoutHandler = () => {
         console.log("로그아웃핸들러")
         sessionStorage.removeItem('Access_Token');

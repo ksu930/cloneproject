@@ -1,20 +1,30 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 import CommunityLayout from "../components/community/CommunityLayout"
 import Footer from "../components/Footer"
 import Layout from "../components/Layout"
-import { isSuccessFalse, __getDetailPost, __postFeed } from "../redux/modules/postSlice"
+import { isSuccessFalse, __editPost, __getDetailPost, __getPost, __postFeed } from "../redux/modules/postSlice"
 
 const WritePage=( ) =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {isSuccess, post} = useSelector(state=>state.post)
+    const postId = useParams()
+    const id = Number(postId.id)
+    
+    const {isSuccess, post, posts} = useSelector(state=>state.post)
+    const editPost = posts.find((a) => a.postId===id)
+
     const initialState = {
         title: "",
         content: "",
     };
+
+    const [editedPost, setEditedPost] = useState({
+        title: editPost?.title,
+        content : editPost?.content
+    })
     const [new_post, setNew_Post] = useState(initialState);
     const [imgSave, setImgSave] = useState("");
 
@@ -25,6 +35,12 @@ const WritePage=( ) =>{
     const onUpLoadHandler = (e) => {
         const { name, value } = e.target;
         setNew_Post({ ...new_post, [name]: value });
+    };
+    const onChangeHandler = (e) => {
+        const {name, value} = e.target;
+        setEditedPost({
+            ...editedPost, [name]:value,
+        });
     };
     
     const onPostingHandler = (e) => {
@@ -39,77 +55,165 @@ const WritePage=( ) =>{
         dispatch(__postFeed(formData));
       };
 
-      useEffect(()=>{
-        if(isSuccess){
-          dispatch(__getDetailPost(post.postId));
-          navigate(`/detail/${post.postId}`)
-          dispatch(isSuccessFalse())
-        }
-      },[onPostingHandler])
-      
-    return(
-        <Layout>
-            <CommunityLayout>
-                <StForm enctype="multipart/form-data" onSubmit={onPostingHandler}>
-                    <div className="article-write">
-                        <div className="article-write-header">
-                            <div className="article-write__title">글쓰기</div>
-                        </div>
-                        <div className="article-write-input">
-                            <input 
-                            className="article-write__text"
-                            type="text" 
-                            name="title" 
-                            value={new_post.title}
-                            onChange={onUpLoadHandler}
-                            placeholder="제목"
-                            required
-                            />
-                        </div>
-                        <div className="article-write-input--link">
-                            <div className="img_input_box">
-                                <label className="img_input_label" htmlFor="img_file">
-                                    내 컴퓨터에서 사진을 선택해주세요.
-                                </label>
+    const onEditHandler = (event) => {
+    if (editedPost.content === "" && editedPost.title === "") {
+        event.preventDefault();
+        alert("제목이나 내용 둘다 비어있을 수 없습니다.");
+    } else {
+        event.preventDefault();
+        dispatch(__editPost({editedPost, id}));
+        navigate(`/detail/${id}`)
+    } 
+    };
+
+    useEffect(()=>{
+    if(isSuccess){
+        dispatch(__getDetailPost(post.postId));
+        navigate(`/detail/${post.postId}`)
+        dispatch(isSuccessFalse())
+    }
+    },[onPostingHandler])
+
+    useEffect(() => {
+    dispatch(__getPost());
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(__getDetailPost(id));
+    // eslint-disable-next-line
+    }, [dispatch]);
+
+    useEffect(()=>{
+        setEditedPost(
+            {
+                title: editPost?.title,
+                content : editPost?.content
+            }
+        )
+    },[posts])
+
+    if(!id){
+        return(
+            <Layout>
+                <CommunityLayout>
+                    <StForm enctype="multipart/form-data" onSubmit={onPostingHandler}>
+                        <div className="article-write">
+                            <div className="article-write-header">
+                                <div className="article-write__title">글쓰기</div>
+                            </div>
+                            <div className="article-write-input">
                                 <input 
-                                className="img_input" 
-                                type="file" 
-                                id="img_file" 
-                                accept="image/*"
-                                onChange={saveFileImage}
+                                className="article-write__text"
+                                type="text" 
+                                name="title" 
+                                value={new_post.title}
+                                onChange={onUpLoadHandler}
+                                placeholder="제목"
+                                required
+                                />
+                            </div>
+                            <div className="article-write-input--link">
+                                <div className="img_input_box">
+                                    <label className="img_input_label" htmlFor="img_file">
+                                        내 컴퓨터에서 사진을 선택해주세요.
+                                    </label>
+                                    <input 
+                                    className="img_input" 
+                                    type="file" 
+                                    id="img_file" 
+                                    accept="image/*"
+                                    onChange={saveFileImage}
+                                    />
+                                </div>
+                            </div>
+                            <div className="article-write-content">
+                                <div className="prev-img-box">
+                                <img className="prev-img" alt="" src={imgSave ? imgSave : "image/no_img.png"}/>
+                                </div>
+                                <textarea 
+                                className="comment_input" 
+                                type="text" 
+                                name="content" 
+                                value={new_post.content} 
+                                onChange={onUpLoadHandler}
+                                placeholder="불법촬영물등을 게재할 경우 전기통신사업법 제22조의5제1항에 따라 삭제·접속차단 등의 조치가 취해질 수 있으며 관련 법률에 따라 처벌받을 수 있습니다."
+                                required
                                 />
                             </div>
                         </div>
-                        <div className="article-write-content">
-                            <div className="prev-img-box">
-                            <img className="prev-img" alt="" src={imgSave ? imgSave : "image/no_img.png"}/>
-                            </div>
-                            <textarea 
-                            className="comment_input" 
-                            type="text" 
-                            name="content" 
-                            value={new_post.content} 
-                            onChange={onUpLoadHandler}
-                            placeholder="불법촬영물등을 게재할 경우 전기통신사업법 제22조의5제1항에 따라 삭제·접속차단 등의 조치가 취해질 수 있으며 관련 법률에 따라 처벌받을 수 있습니다."
-                            required
-                            />
+                        <div className="article-content-banner">
+                            <img src="https://talk.op.gg/images/icon-adult-s@2x.png" alt="" />
+                            <span>
+                                불법촬영물등을 게재할 경우 전기통신사업법 제22조의5제1항에 따라 삭제·접속차단 등의 조치가 취해질 수 있으며 관련 법률에 따라 처벌받을 수 있습니다.
+                            </span>
                         </div>
-                    </div>
-                    <div className="article-content-banner">
-                        <img src="https://talk.op.gg/images/icon-adult-s@2x.png" alt="" />
-                        <span>
-                            불법촬영물등을 게재할 경우 전기통신사업법 제22조의5제1항에 따라 삭제·접속차단 등의 조치가 취해질 수 있으며 관련 법률에 따라 처벌받을 수 있습니다.
-                        </span>
-                    </div>
-                    <div className="article-write-buttons">
-                        <button className="cancle_button" type="button" onClick={() => {navigate("/community")}}>취소</button>
-                        <button className="submit_button">작성완료</button>
-                    </div>
-                </StForm>
-            </CommunityLayout>
-            <Footer/>
-        </Layout>
-    )
+                        <div className="article-write-buttons">
+                            <button className="cancle_button" type="button" onClick={() => {navigate("/community")}}>취소</button>
+                            <button className="submit_button">작성완료</button>
+                        </div>
+                    </StForm>
+                </CommunityLayout>
+                <Footer/>
+            </Layout>
+        )
+    } else{
+        return(
+            <Layout>
+                <CommunityLayout>
+                    <StForm enctype="multipart/form-data" onSubmit={onEditHandler}>
+                        <div className="article-write">
+                            <div className="article-write-header">
+                                <div className="article-write__title">글쓰기</div>
+                            </div>
+                            <div className="article-write-input">
+                                <input 
+                                className="article-write__text"
+                                type="text" 
+                                name="title" 
+                                value={editedPost?.title}
+                                onChange={onChangeHandler}
+                                placeholder="제목"
+                                required
+                                />
+                            </div>
+                            <div className="article-write-input--link">
+                            <div className="img-box">
+                                <img src={`${post.img||post.image}`} alt=""/>
+                            </div>
+                            </div>
+                            <div className="article-write-content">
+                                <div className="prev-img-box">
+                                <img className="prev-img" alt="" src={imgSave ? imgSave : "image/no_img.png"}/>
+                                </div>
+                                <textarea 
+                                className="comment_input" 
+                                type="text" 
+                                name="content" 
+                                value={editedPost?.content} 
+                                onChange={onChangeHandler}
+                                placeholder="불법촬영물등을 게재할 경우 전기통신사업법 제22조의5제1항에 따라 삭제·접속차단 등의 조치가 취해질 수 있으며 관련 법률에 따라 처벌받을 수 있습니다."
+                                required
+                                />
+                            </div>
+                        </div>
+                        <div className="article-content-banner">
+                            <img src="https://talk.op.gg/images/icon-adult-s@2x.png" alt="" />
+                            <span>
+                                불법촬영물등을 게재할 경우 전기통신사업법 제22조의5제1항에 따라 삭제·접속차단 등의 조치가 취해질 수 있으며 관련 법률에 따라 처벌받을 수 있습니다.
+                            </span>
+                        </div>
+                        <div className="article-write-buttons">
+                            <button className="cancle_button" type="button" onClick={() => {navigate(`/detail/${id}`)}}>취소</button>
+                            <button className="submit_button">작성완료</button>
+                        </div>
+                    </StForm>
+                </CommunityLayout>
+                <Footer/>
+            </Layout>
+        )
+    }
+      
+    
 }
 export default WritePage
 
@@ -282,5 +386,16 @@ const StForm = styled.form`
         border: 0;
         padding: 0;
         cursor: pointer;
+    }
+    .img-box{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        img{
+        width: 200px;
+        height: 200px;
+        }
     }
 `
