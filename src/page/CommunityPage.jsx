@@ -124,7 +124,7 @@ const CommunityPage=() =>{
                                         </div>
                                     </div>
                                     <div className="article-list-item-thumbnail" onClick={()=> onClickDetailHandler(post.postId)}>
-                                        <img className="article-list-item__thumbnail" src={`${post.image}`} alt=""/>
+                                        <img className="article-list-item__thumbnail" src={`${post.image||post.img}`} alt=""/>
                                     </div>
                                 </article>
                                 )
