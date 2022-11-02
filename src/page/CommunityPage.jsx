@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
@@ -11,10 +11,12 @@ const CommunityPage=() =>{
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {posts} = useSelector(state => state.post);
+    const {isLogin} = useSelector(state => state.user)
+    const [page, setPage] = useState(0)
 
     useEffect(() => {
-    dispatch(__getPost());
-    }, [dispatch]);
+        dispatch(__getPost(page));
+    }, [page]);
 
     const onClickLikeHandler = (id) =>{
         dispatch(__likePost(id))
@@ -24,6 +26,15 @@ const CommunityPage=() =>{
         dispatch(__getDetailPost(id));
         navigate(`/detail/${id}`);
     }
+
+    const onClickNextPageHandler = () => {
+        setPage(page+1)
+    }
+
+    const onClickPrevPageHandler = () => {
+        setPage(page-1)
+    }
+
     return(
             <Layout>
                 <CommunityLayout >
@@ -35,9 +46,9 @@ const CommunityPage=() =>{
                                 </div>
                                 <ul className="sub-header-button">
                                     <li className="sub-header-button__item">
-                                        <Link to="/write" className="write-link">
+                                        <div onClick={()=>{isLogin?navigate("/write"):navigate("/login")}} className="write-link">
                                             <img src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기"/>
-                                        </Link>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -122,7 +133,14 @@ const CommunityPage=() =>{
 
                         <div className="article-list-paging-content">
                             <div className="article-list-paging-list">
-                                <button>
+                                {page !==0 ?
+                                <button className="prev-page" onClick={()=>onClickPrevPageHandler()}>
+                                    <img src="https://talk.op.gg/images/icon-arrow-left@2x.png" alt=""/>
+                                    <span>이전</span>
+                                </button>
+                                :null}
+
+                                <button className="next-page" onClick={()=>onClickNextPageHandler()}>
                                     <span>다음</span>
                                     <img src="https://talk.op.gg/images/icon-arrow-right@2x.png" alt=""/>
                                 </button>
@@ -476,7 +494,25 @@ const StContent = styled.div`
         margin-left: 0;
         float: none;
         vertical-align: middle;
-        button{
+        .prev-page{
+            width: 77px;
+            height: 40px;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 14px;
+            color: #7b858e;
+            padding: 8px 16px 7px 7px;
+            border-radius: 4px;
+            background-color: #fff;
+            border: 1px solid #dddfe4;
+            cursor: pointer;
+            margin-right: 10px;
+            img{
+                vertical-align: middle;
+                width: 24px;
+            }
+        }
+        .next-page{
             width: 77px;
             height: 40px;
             box-sizing: border-box;
