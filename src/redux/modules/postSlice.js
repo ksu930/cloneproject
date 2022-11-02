@@ -153,7 +153,9 @@ export const postSlice = createSlice({
       state.isSuccess = action.payload.result;
     },
     //게시글 삭제
-    [__deletePost.fulfilled]: (state, action) => {},
+    [__deletePost.fulfilled]: (state, action) => {
+      state.posts = state.posts.filter((post) => post.postId !== action.payload);
+    },
     [__deletePost.rejected]: (state, action) => {},
     //게시글 수정
     [__editPost.fulfilled]: (state, action) => {
