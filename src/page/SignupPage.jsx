@@ -74,11 +74,6 @@ const SignupPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!pwCheck) {
-      alert("비밀번호를 형식에 맞게 입력해주세요.");
-    } else if (!emailCheck) {
-      alert("이메일을 형식에 맞게 입력해주세요.");
-    }
     dispatch(
       __addUsers({
         email: user.email,
@@ -86,7 +81,10 @@ const SignupPage = () => {
         name: user.name,
       })
     );
+    console.log(__addUsers);
     setUser(initialState);
+    navigate("/login");
+    alert("회원가입이 완료되었습니다!");
   };
 
   return (
@@ -214,7 +212,7 @@ const SignupPage = () => {
                         ) : (
                           <button
                             className="signUpDisabledBtn"
-                            onClick={onSubmit}
+                            disabled="disabled"
                           >
                             가입하기
                           </button>
