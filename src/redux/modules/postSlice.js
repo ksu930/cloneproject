@@ -17,9 +17,9 @@ export const __bestWrite = createAsyncThunk(
 //전체 게시글 조회
 export const __getPost = createAsyncThunk(
   "post/getPost",
-  async (_, thunkAPI) => {
+  async (page, thunkAPI) => {
     try {
-      const { data } = await api.get("post").then((res) => res.data);
+      const { data } = await api.get(`post?page=${page}`).then((res) => res.data);
 
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {

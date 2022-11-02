@@ -14,6 +14,7 @@ const DetailPage=( ) =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {post} = useSelector(state=>state.post)
+    const {isLogin} = useSelector(state=>state.user)
     const [content, setContent] = useState({
         content:""
   });
@@ -23,7 +24,7 @@ const DetailPage=( ) =>{
             ...content, [name]:value,
         });
     };
-
+console.log(post)
     useEffect(() => {
         dispatch(__getDetailPost(id));
     // eslint-disable-next-line
@@ -31,15 +32,8 @@ const DetailPage=( ) =>{
 
     const onAddCommentHandler = (e) => {
         e.preventDefault()
-        if(!sessionStorage.getItem('Access_Token')){
-        alert("로그인을해야 댓글 작성이 가능합니다.");
-        setContent({
-            content:""
-        });
-        return
-        }
         if(content.content.trim()==="" ){
-            return alert("댓글을 모두 입력해주세요.");
+            return alert("내용을 입력해주세요.");
         }        
         dispatch(__postComment({content, id}))
         setContent({
@@ -79,7 +73,7 @@ const DetailPage=( ) =>{
                                     <div className="article-meta__item_2">추천 {post.likeNum}</div>
                                 </div>
                             </div>
-                            {post.correctPost?
+                            {isLogin&&post.correctPost?
                             <div className="article-action">
                                 <button className="delete-button" type="button" onClick={onDeletePost}>삭제</button>
                                 <button className="edit-button" type="button" onClick={()=>navigate(`/write/${post.postId}`)}>수정</button>
@@ -94,8 +88,8 @@ const DetailPage=( ) =>{
                         </div>
                         <div className="article-box">
                             <button type="button" className="like-button">
-                                {post.correctLike? <span className="like-button-img" onClick={()=>onClickLikeHandler(post.postId)}></span>
-                                : <span className="nomal-button-img" onClick={()=>onClickLikeHandler(post.postId)}></span>}
+                                {post.correctLike? <span className="like-button-img"  onClick={()=>{isLogin?onClickLikeHandler(post.postId):navigate("/login")}}></span>
+                                : <span className="nomal-button-img"  onClick={()=>{isLogin?onClickLikeHandler(post.postId):navigate("/login")}}></span>}
                                 <span className="like-button-num">{post.likeNum}</span>
                             </button>
                         </div>
@@ -116,18 +110,21 @@ const DetailPage=( ) =>{
                                 <div className="right-box-reload">새로고침</div>
                             </div>
                         </div>
+                        {isLogin?
                         <form className="comment-write" onSubmit={onAddCommentHandler}>
-                            <textarea 
-                            className="comment-write__content"
-                            type="text"
-                            name="content"
-                            value={content.content}
-                            onChange={onChangeHandler}
-                            placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."/>
-                            <div className="comment-write-footer">
-                                <button className="comment-write-submit">작성</button>
-                            </div>
+                        <textarea 
+                        className="comment-write__content"
+                        type="text"
+                        name="content"
+                        value={content.content}
+                        onChange={onChangeHandler}
+                        placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."/>
+                        <div className="comment-write-footer">
+                            <button className="comment-write-submit">작성</button>
+                        </div>
                         </form>
+                        : null}
+                        
                     </div>
                     {post.comments?.length !== 0?
                         <div className="comments-wrap">
@@ -143,7 +140,7 @@ const DetailPage=( ) =>{
                             </div>
                             <ul className="comments-box">
                             {post.comments?.map((comment)=>{
-                                return (<Comments key={comment.id} comment={comment} postId={id}/>)
+                                return (<Comments isLogin={isLogin} key={comment.id} comment={comment} postId={id}/>)
                             })}
                             </ul>
                         </div>

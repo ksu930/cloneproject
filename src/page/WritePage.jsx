@@ -75,11 +75,11 @@ const WritePage=( ) =>{
     },[onPostingHandler])
 
     useEffect(() => {
-    dispatch(__getPost());
+        dispatch(__getPost());
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(__getDetailPost(id));
+        if(id) dispatch(__getDetailPost(id));
     // eslint-disable-next-line
     }, [dispatch]);
 

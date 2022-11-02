@@ -19,7 +19,7 @@ const Layout = ({children}) => {
                     </StLink>
                 </div>
                 <form className="game-info-search">
-                    <input className="game-info-search__input" type="text" name="username" placeholder="소환사검색"/>
+                    <input className="game-info-search__input" type="text" name="keyword" placeholder="소환사검색"/>
                     <button className="game-info-search__button">
                         <img src="https://talk.op.gg/images/btn-lol@2x.png" alt=""></img>
                     </button>
