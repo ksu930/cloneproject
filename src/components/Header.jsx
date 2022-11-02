@@ -10,13 +10,19 @@ const Header = () => {
     const {isLogin} = useSelector(state=>state.user)
     
     const onLogoutHandler = () => {
-        console.log("로그아웃핸들러")
+        if(window.location.pathname==="/write"){
+            if(window.confirm("로그아웃하시겠습니까?")){
+                sessionStorage.removeItem('Access_Token');
+                sessionStorage.removeItem('name')
+                sessionStorage.removeItem('Refresh_Token')
+                dispatch(logoutState())
+                navigate("/community")
+            } 
+            return;
+        }
         sessionStorage.removeItem('Access_Token');
         sessionStorage.removeItem('name')
         sessionStorage.removeItem('Refresh_Token')
-        if(window.location.pathname==="/write"){
-            alert("새글을 작성하기 위해 로그인 해주세요.")
-        }
         dispatch(logoutState())
     };
 
