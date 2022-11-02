@@ -104,9 +104,11 @@ const LoginPage = () => {
                 </div>
               </StLoginCheck>
               {loginUser.password.trim() === "" ? (
-                <StLoginTrimButton onClick={onSubmit}>로그인</StLoginTrimButton>
+                <StLoginTrimButton disabled="disabled" onClick={onSubmit}>
+                  로그인
+                </StLoginTrimButton>
               ) : (
-                <StLoginButton disabled="disabled">로그인</StLoginButton>
+                <StLoginButton onClick={onSubmit}>로그인</StLoginButton>
               )}
               <StSignUp>
                 OP.GG에 처음이세요?

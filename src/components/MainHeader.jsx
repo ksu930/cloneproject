@@ -6,6 +6,7 @@ const MainHeader = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("Access_Token");
+  const name = sessionStorage.getItem("name");
   const LogoutButton = () => {
     sessionStorage.removeItem("Access_Token");
     sessionStorage.removeItem("Refresh_Token");
@@ -109,7 +110,7 @@ const MainHeader = () => {
             {token ? (
               <StHeaderLogoutToggle>
                 <StHeaderLogoutSpan>
-                  닉네임
+                  {name}
                   <StLogoutImg src="https://talk.op.gg/images/icon-gnb-dropdown.png" />
                 </StHeaderLogoutSpan>
                 <StDropdown>
