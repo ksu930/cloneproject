@@ -106,9 +106,7 @@ const LoginPage = () => {
               {loginUser.password.trim() === "" ? (
                 <StLoginTrimButton onClick={onSubmit}>로그인</StLoginTrimButton>
               ) : (
-                <button className="PwTrimButton" disabled="disabled">
-                  로그인
-                </button>
+                <StLoginButton disabled="disabled">로그인</StLoginButton>
               )}
               <StSignUp>
                 OP.GG에 처음이세요?
