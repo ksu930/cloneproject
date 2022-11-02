@@ -24,7 +24,7 @@ const DetailPage=( ) =>{
             ...content, [name]:value,
         });
     };
-
+console.log(post)
     useEffect(() => {
         dispatch(__getDetailPost(id));
     // eslint-disable-next-line

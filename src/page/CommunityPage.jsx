@@ -46,7 +46,7 @@ const CommunityPage=() =>{
                                 </div>
                                 <ul className="sub-header-button">
                                     <li className="sub-header-button__item">
-                                        <div onClick={()=>{isLogin?navigate("/write"):navigate("/login")}} className="write-link">
+                                        <div onClick={()=>{isLogin? navigate("/write") : navigate("/login")}} className="write-link">
                                             <img src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기"/>
                                         </div>
                                     </li>
