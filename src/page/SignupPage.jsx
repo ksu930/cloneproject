@@ -214,7 +214,6 @@ const SignupPage = () => {
                         ) : (
                           <button
                             className="signUpDisabledBtn"
-                            disabled="disabled"
                             onClick={onSubmit}
                           >
                             가입하기
