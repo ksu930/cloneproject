@@ -103,7 +103,13 @@ const LoginPage = () => {
                   <label>로그인 상태 유지하기</label>
                 </div>
               </StLoginCheck>
-              <StLoginButton onClick={onSubmit}>로그인</StLoginButton>
+              {loginUser.password.trim() === "" ? (
+                <StLoginTrimButton onClick={onSubmit}>로그인</StLoginTrimButton>
+              ) : (
+                <button className="PwTrimButton" disabled="disabled">
+                  로그인
+                </button>
+              )}
               <StSignUp>
                 OP.GG에 처음이세요?
                 <span>
@@ -338,17 +344,9 @@ const StLoginCheck = styled.div`
     line-height: 17px;
     display: inline-block;
   }
+  .PwTrimButton {
+  }
 `;
-
-// const StPwSpan = styled.span`
-//   a {
-//     font-weight: 400;
-//     font-size: 14px;
-//     line-height: 20px;
-//     color: #1ea1f7;
-//     text-decoration: underline;
-//   }
-// `;
 
 const StLoginButton = styled.button`
   font-size: 16px;
@@ -369,8 +367,9 @@ const StLoginButton = styled.button`
   cursor: pointer;
   line-height: 56px;
   padding: 0 20px;
-  /* background-color: #dddfe4 !important;
-  cursor: default !important;
+`;
+
+const StLoginTrimButton = styled.button`
   font-size: 16px;
   border-radius: 3px;
   display: inline-block;
@@ -380,8 +379,15 @@ const StLoginButton = styled.button`
   height: 56px;
   margin-top: 40px;
   width: 100%;
+  position: relative;
+  font-weight: 400;
+  line-height: 19px;
+  text-align: center;
+  background-color: #dddfe4;
+  font-weight: 700;
+  cursor: default;
   line-height: 56px;
-  padding: 0 20px; */
+  padding: 0 20px;
 `;
 
 const StSignUp = styled.div`

@@ -79,11 +79,9 @@ export const __loginUser = createAsyncThunk(
 const initialState = {
   users: [],
   overlapEmail: false,
-  overlapEmail2: false,
-  overlapEmail3: false,
   overlapName: false,
-  isLoading: false,
   isLogin: false,
+  isLoading: false,
   error: null,
 };
 export const userSlice = createSlice({
@@ -131,14 +129,11 @@ export const userSlice = createSlice({
     },
     [__loginUser.rejected]: (state, action) => {
       state.isLoading = false;
-      alert("아이디가 존재하지않습니다.");
     },
     [__emailCheck.fulfilled]: (state, action) => {
       state.isLoading = false;
       if (action.payload.data.result) {
         state.overlapEmail = true;
-        state.overlapEmail2 = true;
-        state.overlapEmail3 = true;
       } else {
         state.overlapEmail = false;
       }

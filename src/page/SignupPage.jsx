@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
   overlapEmailCheck,
-  overlapNameCheck,
   __addUsers,
   __nameCheck,
   __emailCheck,
@@ -166,8 +165,7 @@ const SignupPage = () => {
                         책임지지 않습니다.
                       </div>
                     ) : overlapName ? (
-                      <div>
-                        <StDangerImg />
+                      <div style={{ color: "blue" }}>
                         사용 할 수 있는 닉네임입니다.
                       </div>
                     ) : (
@@ -206,9 +204,22 @@ const SignupPage = () => {
                         >
                           취소
                         </button>
-                        <button className="signUpBtn" onClick={onSubmit}>
-                          가입하기
-                        </button>
+                        {emailCheck &&
+                        overlapEmail &&
+                        overlapName &&
+                        pwCheck ? (
+                          <button className="signUpBtn" onClick={onSubmit}>
+                            가입하기
+                          </button>
+                        ) : (
+                          <button
+                            className="signUpDisabledBtn"
+                            disabled="disabled"
+                            onClick={onSubmit}
+                          >
+                            가입하기
+                          </button>
+                        )}
                       </StSignUpButtonBox>
                     </div>
                   </div>
@@ -411,6 +422,25 @@ const StSignUpButtonBox = styled.div`
     background-color: #1ea1f7;
     font-weight: 700;
     cursor: pointer;
+    line-height: 56px;
+    padding: 0 20px;
+    float: right;
+    width: 217px;
+  }
+  .signUpDisabledBtn {
+    font-size: 16px;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #fff;
+    border: 0;
+    height: 56px;
+    position: relative;
+    font-weight: 400;
+    line-height: 19px;
+    text-align: center;
+    cursor: default;
+    font-weight: 700;
+    background-color: #dddfe4;
     line-height: 56px;
     padding: 0 20px;
     float: right;
