@@ -1,8 +1,32 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import { __Keyword } from "../redux/modules/postSlice";
 import Header from "./Header"
 
 const Layout = ({children}) => {
+    const dispatch = useDispatch();
+    const [keyword, setKeyword] = useState({
+        keyword:""
+    });
+    const onChangeHandler = (e) => {
+        const {name, value} = e.target;
+        setKeyword({[name] : value});
+    };
+    const onSubmitHandler = (event) => {
+        if (keyword === "") {
+            event.preventDefault();
+            alert("제목이나 내용 둘다 비어있을 수 없습니다.");
+        } else {
+            event.preventDefault();
+            dispatch(__Keyword(keyword.keyword));
+            setKeyword({
+                keyword:""
+            })
+        } 
+    };
+    console.log(keyword)
     return(
         <St1WrapList>
             <Header/>
@@ -18,8 +42,14 @@ const Layout = ({children}) => {
                         <h1 className="game-info__name">리그오브레전드</h1>
                     </StLink>
                 </div>
-                <form className="game-info-search">
-                    <input className="game-info-search__input" type="text" name="keyword" placeholder="소환사검색"/>
+                <form className="game-info-search" onSubmit={onSubmitHandler}>
+                    <input 
+                    className="game-info-search__input" 
+                    type="text" 
+                    name="keyword" 
+                    value={keyword.keyword} 
+                    placeholder="검색어 입력"
+                    onChange={onChangeHandler}/>
                     <button className="game-info-search__button">
                         <img src="https://talk.op.gg/images/btn-lol@2x.png" alt=""></img>
                     </button>
@@ -101,6 +131,7 @@ const StBackground = styled.div`
                 font-size: 14px;
                 padding: 12px 62px 11px 12px;
                 box-sizing: border-box;
+                outline: none;
             }
             .game-info-search__button{
                 position: absolute;
