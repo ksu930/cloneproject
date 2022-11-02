@@ -97,7 +97,7 @@ const LoginPage = () => {
               </div>
               <StLoginCheck>
                 <div>
-                  <span className=" member__Checkbox member__Checkbox--Checked ">
+                  <span className=" member__Checkbox ">
                     <input className="checkbox" type="checkbox" />
                   </span>
                   <label>로그인 상태 유지하기</label>
@@ -317,7 +317,7 @@ const StLoginCheck = styled.div`
     margin: 0;
     cursor: pointer;
   }
-  .member__Checkbox--Checked::after {
+  .member__Checkbox::after {
     position: absolute;
     left: 5px;
     top: 5px;

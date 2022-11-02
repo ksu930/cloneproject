@@ -23,6 +23,7 @@ const SignupPage = () => {
   const { overlapEmail, overlapName } = useSelector((state) => state.user);
   const [emailCheck, setEmailCheck] = useState(false);
   const [pwCheck, setPwCheck] = useState(false);
+  const [emailState, setEmailState] = useState(false);
   const [user, setUser] = useState(initialState);
 
   const regPw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
@@ -40,15 +41,16 @@ const SignupPage = () => {
   //이메일 중복검사
   const EmailCk = () => {
     if (emailCheck === true) {
+      setEmailState(true);
       dispatch(__emailCheck({ email: user.email }));
     }
   };
 
   //닉네임 중복검사
   const NameCk = () => {
-    if (user.name.trim() === "") {
-      //alert("닉네임을 입력해주세요!") 밑에 경고문 띄우기
-    }
+    // if (user.name.trim() === "") {
+    //   //alert("닉네임을 입력해주세요!") 밑에 경고문 띄우기
+    // }
     dispatch(__nameCheck({ name: user.name }));
   };
 
@@ -124,14 +126,26 @@ const SignupPage = () => {
                     </div>
                     <StNameInput>
                       <div>
-                        {emailCheck ? (
+                        {user.email.trim() === "" ? null : emailState ? (
+                          overlapEmail ? (
+                            <div style={{ color: "blue" }}>
+                              사용 가능한 이메일입니다.
+                            </div>
+                          ) : (
+                            <StErrorMassage>
+                              <StDangerImg src="https://member.op.gg/icon_alert.953d9b77.svg" />
+                              이미 사용중인 이메일 입니다.
+                            </StErrorMassage>
+                          )
+                        ) : emailCheck ? (
                           <div style={{ color: "blue" }}>
                             형식에 맞는 이메일 입니다.
                           </div>
                         ) : (
-                          <div style={{ color: "red" }}>
+                          <StErrorMassage>
+                            <StDangerImg src="https://member.op.gg/icon_alert.953d9b77.svg" />
                             이메일이 형식에 맞지 않습니다.
-                          </div>
+                          </StErrorMassage>
                         )}
                       </div>
                       <div className="inputState">
@@ -146,10 +160,22 @@ const SignupPage = () => {
                         />
                       </div>
                     </StNameInput>
-                    <div className="SignUpMsg">
-                      개인정보를 기입하여 발생될 수 있는 피해는 OP.GG가 일절
-                      책임지지 않습니다.
-                    </div>
+                    {user.name.trim() === "" ? (
+                      <div className="SignUpMsg">
+                        개인정보를 기입하여 발생될 수 있는 피해는 OP.GG가 일절
+                        책임지지 않습니다.
+                      </div>
+                    ) : overlapName ? (
+                      <div>
+                        <StDangerImg />
+                        사용 할 수 있는 닉네임입니다.
+                      </div>
+                    ) : (
+                      <StErrorMassage>
+                        <StDangerImg src="https://member.op.gg/icon_alert.953d9b77.svg" />
+                        이미 사용중인 닉네임입니다.
+                      </StErrorMassage>
+                    )}
                     <div>
                       <StPwBox>
                         <input
@@ -161,19 +187,25 @@ const SignupPage = () => {
                         />
                       </StPwBox>
                       <div>
-                        {pwCheck ? (
+                        {user.password.trim() === "" ? null : pwCheck ? (
                           <div style={{ color: "blue" }}>
                             올바른 비밀번호입니다.
                           </div>
                         ) : (
-                          <div style={{ color: "red" }}>
+                          <StErrorMassage>
+                            <StDangerImg src="https://member.op.gg/icon_alert.953d9b77.svg" />
                             비밀번호가 형식에 맞지 않습니다.
-                          </div>
+                          </StErrorMassage>
                         )}
                       </div>
 
                       <StSignUpButtonBox>
-                        <button className="canCle">취소</button>
+                        <button
+                          className="canCle"
+                          onClick={() => navigate("/login")}
+                        >
+                          취소
+                        </button>
                         <button className="signUpBtn" onClick={onSubmit}>
                           가입하기
                         </button>
@@ -291,6 +323,15 @@ const StImg = styled.img`
   width: 190px;
   height: 48px;
   cursor: pointer;
+`;
+
+const StErrorMassage = styled.div`
+  color: red;
+  margin-top: 5px;
+`;
+const StDangerImg = styled.img`
+  width: 14px;
+  margin-right: 5px;
 `;
 
 const StNameInput = styled.div`

@@ -40,7 +40,7 @@ export const __nameCheck = createAsyncThunk(
   "users/__nameCheck",
   async (payload, thunkAPI) => {
     try {
-      const { result } = await axios.post(
+      const result = await axios.post(
         "http://13.124.216.20:8080/api/name-duplicate",
         payload
       );
@@ -79,6 +79,8 @@ export const __loginUser = createAsyncThunk(
 const initialState = {
   users: [],
   overlapEmail: false,
+  overlapEmail2: false,
+  overlapEmail3: false,
   overlapName: false,
   isLoading: false,
   isLogin: false,
@@ -135,6 +137,8 @@ export const userSlice = createSlice({
       state.isLoading = false;
       if (action.payload.data.result) {
         state.overlapEmail = true;
+        state.overlapEmail2 = true;
+        state.overlapEmail3 = true;
       } else {
         state.overlapEmail = false;
       }
@@ -145,7 +149,8 @@ export const userSlice = createSlice({
     },
     [__nameCheck.fulfilled]: (state, action) => {
       state.isLoading = false;
-      if (action.payload) {
+      console.log("action:", action.payload.data.result);
+      if (action.payload.data.result) {
         state.overlapName = true;
       } else {
         state.overlapName = false;
