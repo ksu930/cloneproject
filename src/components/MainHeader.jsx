@@ -1,17 +1,21 @@
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { logoutState } from "../redux/modules/userSlice";
+import { Login } from "../store/store";
 const MainHeader = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("Access_Token");
   const name = sessionStorage.getItem("name");
+  const [isLogin, setIsLogin] = useRecoilState(Login)
   const LogoutButton = () => {
     sessionStorage.removeItem("Access_Token");
     sessionStorage.removeItem("Refresh_Token");
     sessionStorage.removeItem("name");
-    dispatch(logoutState());
+    // dispatch(logoutState());
+    setIsLogin(false)
     navigate("/");
     alert("로그아웃이 완료되었습니다");
   };

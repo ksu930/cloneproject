@@ -1,9 +1,12 @@
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { useRecoilValue } from "recoil"
 import styled from "styled-components"
+import { Login } from "../../store/store"
 
 const CommunityLayout = ({children}) =>{
-    const {isLogin} = useSelector(state=>state.user)
+    // const {isLogin} = useSelector(state=>state.user)
+    const isLogin = useRecoilValue(Login)
     return(
         <Stcontent>
             <StSidebar>

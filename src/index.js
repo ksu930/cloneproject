@@ -5,15 +5,17 @@ import store from "./redux/configure/configureStore"
 import App from "./App";
 import GlobalStyles from "./global/GlobalStyle";
 import {RecoilRoot} from 'recoil'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-
-
+const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Provider store={store}>
-    <RecoilRoot>
-      <App />
-      <GlobalStyles />
-    </RecoilRoot>
-  </Provider>
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      <RecoilRoot>
+        <App />
+        <GlobalStyles />
+      </RecoilRoot>
+    </Provider>
+  </QueryClientProvider>
 );
