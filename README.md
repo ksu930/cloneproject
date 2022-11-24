@@ -11,11 +11,11 @@
 ![스크린샷_20221106_105926](https://user-images.githubusercontent.com/113274559/203824357-a870d33b-6aa5-42b0-afe5-b0fe82bbef98.png)
 ![스크린샷_20221125_124159](https://user-images.githubusercontent.com/113274559/203824380-7d2d0057-a390-4ebf-a656-c6983b50362b.png)  
 
-회원가입 페이지  
+## 회원가입 페이지  
 ![스크린샷_20221125_124125](https://user-images.githubusercontent.com/113274559/203825688-8152e890-bce9-4fe6-a3a7-81cb2bde04a4.png)  
 ![스크린샷_20221125_124142](https://user-images.githubusercontent.com/113274559/203825711-7fd6ecb8-a0d1-494c-8c16-7b54af6e0352.png)  
 
-메인페이지
+## 메인페이지
 ![스크린샷_20221125_124102](https://user-images.githubusercontent.com/113274559/203825503-7930f2ae-fe3e-4806-b563-58afad6e5cf8.png)
 
 
