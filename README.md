@@ -42,7 +42,7 @@ __OP.GG라는 게임 커뮤니티 사이트를 최대한 유사하게 구현한 
 4. Json-server(목데이터)
 5. React-query(일부)
 6. Recoil(일부)
-7. React-intersection-observer(무한스크롤)
+7. Styled-component
 
 <br/>
 
