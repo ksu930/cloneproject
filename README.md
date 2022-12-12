@@ -37,7 +37,7 @@ __OP.GG라는 게임 커뮤니티 사이트를 최대한 유사하게 구현한 
 
 ## :hammer: Technology Stack
 1. React
-2. Redux(thunk,toolkit)
+2. Redux(toolkit)
 3. Axios
 4. Json-server(목데이터)
 5. React-query(일부)
