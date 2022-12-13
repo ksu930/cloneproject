@@ -123,7 +123,6 @@ export const userSlice = createSlice({
         );
         sessionStorage.setItem("name", action.payload.data.data.name);
       } else {
-        alert("아이디 비밀번호가 일치하지 않습니다");
       }
     },
     [__loginUser.rejected]: (state, action) => {

@@ -15,7 +15,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const { isLogin } = useSelector((state) => state.user);
-  const isLogin = useRecoilValue(Login)
+  const isLogin = useRecoilValue(Login);
   const initialState = {
     email: "",
     password: "",
@@ -29,7 +29,6 @@ const LoginPage = () => {
       [name]: value,
     });
   };
-
   useEffect(() => {
     if (isLogin) {
       navigate("/");
@@ -38,6 +37,7 @@ const LoginPage = () => {
     } else {
       navigate("/login");
       dispatch(logoutState());
+      alert("아이디 비밀번호가 일치하지 않습니다");
     }
     // eslint-disable-next-line
   }, [isLogin]);
