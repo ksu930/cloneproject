@@ -1,72 +1,77 @@
-# Getting Started with Create React App
+# 클론프로젝트 "OP.GG" (React)
+### :link: [프로젝트 바로가기](https://opggclone-1wetas09i-ksu930.vercel.app/ "프로젝트")
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br/>
 
-## Available Scripts
+## :pushpin: Summary
+__OP.GG라는 게임 커뮤니티 사이트를 최대한 유사하게 구현한 프로젝트입니다.__ 서비스되고 있는 웹페이지를 선정하여 CSS적으로 최대한 유사하게 구현해보는 것을 목적으로 실시한 프로젝트입니다.
 
-In the project directory, you can run:
+기존 프로젝트의 MVP 기능과 스코프를 비슷하게 하여, React와 Redux의 사용을 숙달할 수 있었고 현업에서 어떤 CSS속성을 사용하는지 공부해보고, 내것으로 만들 수 있는 시간이었습니다. 평소에 자주 사용하였지만 정확한 원리를 모르고 사용했었던 속성들에 대해서 공부하는 시간을 가질수 있었습니다.
+모든페이지를 구현해보고싶었지만, 1주일이라는 시간적 제약으로 인하여 메인페이지와 커뮤니티 페이지만 구현하였습니다.
 
-### `yarn start`
+<br/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## :bulb: 주요기능
+1. 회원가입(유효성검사, 헬퍼 텍스트, 중복확인)
+2. 로그인(토큰저장)
+3. 로그인/로그아웃 상태에 따른 헤더 반응
+4. 게시글 작성/조회/수정/삭제(이미지포함)
+5. 댓글 작성/조회/수정/삭제
+6. 좋아요 기능
+7. 페이지네이션
+8. 검색기능
+<br/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## :mag_right: Meaning
+그동안 정확한 기능을 모르고 사용해왔던 CSS 속성들을 자세하게 알아가며 적용해본 프로젝트입니다. MVP기능의 스코프는 이전 프로젝트와 유사하지만, 실제로 많은 사용자가 이용하고 있는 웹페이지를 유사하게 클론해본다는 점에서 의미가 있는 프로젝트였습니다.
 
-### `yarn test`
+기존의 프로젝트는 UI/UX적인 요소가 반영되지않고, 기능구현만을 위한 단순한 디자인의 프로젝트였기때문에 CSS 적용이 쉬운편이었습니다. 하지만 사용자의 편의성을 고려해 만들어진 실제 웹페이지의 네비게이션바와 여러가지 드롭다운 모션, 화면의 배치는 구성이 복잡하고 CSS 속성들에 자세히 알지 못하면 구현하기 어려운 작업이었습니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+개발자도구를 이용해 화면의 구성이 어떻게 이루어지고, 네비게이션 바에는 어떤 애니메이션기능이 있는지 확인해보면서 지금까지 아무 생각없이 이용해왔던 웹페이지들이 얼마나 복잡하게 이루어져있는지 깨달을 수 있었습니다. 개발자로서 로직을 잘짜고, 알고리즘을 효율적으로 풀어나가는 역량도 중요하겠지만, 고객이 원하고 내가 원하는 화면을 마음대로 구현할 수 있는 역량도 중요하다는 것을 직접 느껴볼 수 있는 시간이었습니다.
 
-### `yarn build`
+프로젝트 기간이 부족하여, 소셜로그인 기능과 에디터를 활용한 게시판 구현을 실현하지 못한게 아쉬운 프로젝트기간이었지만 짧은 기간 동안 많은 내용을 공부할 수 있었던 시간이었습니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+실제 웹페이지와 정말 유사하게 구현할 수 있을 정도로 CSS를 공부했고, 라이브러리를 사용하지않고 페이지네이션을 구현해보고, 검색기능을 추가해 적용시켜 볼 수 있었습니다. 그리고 Redux의 보일러코드를 줄여주고 불편한 API 통신 절차를 개선해줄 React-query와 Recoil을 일부적용해 봄으로써 프론트엔드 개발자로써 기술스택의 범위를 확장했다는 점에서 의미가 있었습니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## :hammer: Technology Stack
+1. React
+2. Redux(toolkit)
+3. Axios
+4. Json-server(목데이터)
+5. React-query(일부)
+6. Recoil(일부)
+7. Styled-component
 
-### `yarn eject`
+<br/>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## :family: Members
+1. 김성욱(Frontend)
+2. 김민석(Frontend)
+3. 강진구(Backend)
+4. 이동재(Backend)
+5. 조정우(Backend)  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br/>  
+  
+## :camera: 로그인 페이지  
+![스크린샷_20221106_105926](https://user-images.githubusercontent.com/113274559/203824357-a870d33b-6aa5-42b0-afe5-b0fe82bbef98.png)
+![스크린샷_20221125_124159](https://user-images.githubusercontent.com/113274559/203824380-7d2d0057-a390-4ebf-a656-c6983b50362b.png)  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## :camera: 회원가입 페이지  
+![스크린샷_20221125_124125](https://user-images.githubusercontent.com/113274559/203825688-8152e890-bce9-4fe6-a3a7-81cb2bde04a4.png)  
+![스크린샷_20221125_124142](https://user-images.githubusercontent.com/113274559/203825711-7fd6ecb8-a0d1-494c-8c16-7b54af6e0352.png)  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## :camera: 메인페이지
+![스크린샷_20221125_124102](https://user-images.githubusercontent.com/113274559/203825503-7930f2ae-fe3e-4806-b563-58afad6e5cf8.png)
 
-## Learn More
+## :camera: 전체 글 조회  
+![스크린샷_20221125_124227](https://user-images.githubusercontent.com/113274559/203825079-d139e1e6-89c4-4606-9ccb-12c143cda6ab.png)  
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## :camera: 상세 글 조회  
+![스크린샷_20221125_124305](https://user-images.githubusercontent.com/113274559/203825114-ad6fb0c4-187b-4f67-8f87-85cb1035bc06.png)  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# hanghae99team4
-# cloneproject
+## :camera: 댓글CRUD  
+![스크린샷_20221125_124320](https://user-images.githubusercontent.com/113274559/203825189-e0187796-b7bc-427c-8cbe-cc3e95a8e596.png)  
+  

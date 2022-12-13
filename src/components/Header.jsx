@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom"
+import { useRecoilState } from "recoil";
 import styled from "styled-components"
 import { loginState, logoutState } from "../redux/modules/userSlice";
+import { Login } from "../store/store";
 
 const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {isLogin} = useSelector(state=>state.user)
+    // const {isLogin} = useSelector(state=>state.user)
+    const [isLogin, setisLogin] = useRecoilState(Login)
     
     const onLogoutHandler = () => {
         if(window.location.pathname==="/write"){
@@ -15,7 +18,8 @@ const Header = () => {
                 sessionStorage.removeItem('Access_Token');
                 sessionStorage.removeItem('name')
                 sessionStorage.removeItem('Refresh_Token')
-                dispatch(logoutState())
+                // dispatch(logoutState())
+                setisLogin(false)
                 navigate("/community")
             } 
             return;
@@ -23,14 +27,17 @@ const Header = () => {
         sessionStorage.removeItem('Access_Token');
         sessionStorage.removeItem('name')
         sessionStorage.removeItem('Refresh_Token')
-        dispatch(logoutState())
+        // dispatch(logoutState())
+        setisLogin(false)
     };
 
     useEffect(() => {
         if(sessionStorage.getItem('Access_Token')){
-            dispatch(loginState())
+            // dispatch(loginState())
+            setisLogin(true)
             } else {
-            dispatch(logoutState())
+            // dispatch(logoutState())
+            setisLogin(false)
             }
     
     },)

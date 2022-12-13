@@ -7,7 +7,7 @@ export const __addUsers = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.post(
-        "http://13.124.216.20:8080/api/signup",
+        "http://3.38.101.115:8080/api/signup",
         payload
       );
       console.log(data, "data");
@@ -26,7 +26,7 @@ export const __emailCheck = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const result = await axios.post(
-        "http://13.124.216.20:8080/api/id-duplicate",
+        "http://3.38.101.115:8080/api/id-duplicate",
         payload
       );
       return thunkAPI.fulfillWithValue(result);
@@ -41,7 +41,7 @@ export const __nameCheck = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const result = await axios.post(
-        "http://13.124.216.20:8080/api/name-duplicate",
+        "http://3.38.101.115:8080/api/name-duplicate",
         payload
       );
       if (result) {
@@ -62,7 +62,7 @@ export const __loginUser = createAsyncThunk(
     try {
       // const data = await api.post("/api/login", payload);
       const data = await axios.post(
-        "http://13.124.216.20:8080/api/login",
+        "http://3.38.101.115:8080/api/login",
         payload
       );
       // if (!data.data.result) {

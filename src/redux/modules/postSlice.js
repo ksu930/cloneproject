@@ -119,6 +119,19 @@ export const __deleteComment = createAsyncThunk(
     }
   }
 );
+//검색기능
+export const __Keyword = createAsyncThunk(
+  "KEYWORD",
+  async (payload, thunkAPI) => {
+    try {
+      // const res = await api.get(`post/search?keyword=${payload}&page=0`);
+      const  { data } = await api.get(`post/search?keyword=${payload}`).then((res) => res.data);;
+      return thunkAPI.fulfillWithValue(data);
+    } catch (err) {
+      return err;
+    }
+  }
+);
 
 const initialState = {
   posts: [],
@@ -209,6 +222,11 @@ export const postSlice = createSlice({
       state.post.comments.splice(idx, 1);
     },
     [__deleteComment.rejected]: (state, action) => {},
+    //검색
+    [__Keyword.fulfilled]: (state, action) => {
+    state.posts = action.payload;
+    },
+    [__Keyword.rejected]: (state, action) => {},
   },
 });
 export const { isSuccessFalse } = postSlice.actions;
