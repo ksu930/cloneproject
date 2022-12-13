@@ -1,22 +1,27 @@
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
+import { useRecoilState } from "recoil"
 import styled from "styled-components"
 import CommunityLayout from "../components/community/CommunityLayout"
 import Footer from "../components/Footer"
 import Layout from "../components/Layout"
 import { __getDetailPost, __getPost, __likePost } from "../redux/modules/postSlice"
+import { allPosts, ReadData } from "../store/store"
 
 const CommunityPage=() =>{
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {posts} = useSelector(state => state.post);
+    const queryClient = useQueryClient();
+    // const {posts} = useSelector(state => state.post);
     const {isLogin} = useSelector(state => state.user)
     const [page, setPage] = useState(0)
 
-    useEffect(() => {
-        dispatch(__getPost(page));
-    }, [page]);
+    // useEffect(() => {
+    //     // dispatch(__getPost(page));
+    //     ReadData(page)
+    // }, [page]);
 
     const onClickLikeHandler = (id) =>{
         dispatch(__likePost(id))
@@ -34,6 +39,24 @@ const CommunityPage=() =>{
     const onClickPrevPageHandler = () => {
         setPage(page-1)
     }
+
+    useEffect(()=>{
+        console.log("유즈이펙트",page)
+        queryClient.invalidateQueries(['posts'])
+    },[page])
+    //recoil
+    const [posts, setPosts] = useRecoilState(allPosts)
+
+    //danstackQuery
+    const {isLoading, isError, isSuccess} = useQuery(['posts'], ()=> ReadData(page), {
+            refetchOnWindowFocus: false,
+            onSuccess: (temp) => {
+                setPosts(temp.data.data)
+            },
+            onError:(temp)=>{
+                console.log('error',temp)
+            }
+        });
 
     return(
             <Layout>
@@ -100,12 +123,14 @@ const CommunityPage=() =>{
                             </div>
                         </div>
                         <section className="article-list">
-                            {posts.map((post)=>(
+                            {posts?.map((post)=>(
                                 <article className="article-list-item" key={post.postId}>
                                     <div className="article-list-item__vote">
-                                        {post.correctLike?
-                                        <img src="https://talk.op.gg/images/icon_vote_up_on.png" alt="" onClick={()=>onClickLikeHandler(post.postId)}/>
-                                        :<img src="https://talk.op.gg/images/icon-vote-up.png" alt="" onClick={()=>onClickLikeHandler(post.postId)}/>}
+                                        {isLogin? 
+                                            post.correctLike?
+                                            <img src="https://talk.op.gg/images/icon_vote_up_on.png" alt="" onClick={()=>onClickLikeHandler(post.postId)}/>
+                                            :<img src="https://talk.op.gg/images/icon-vote-up.png" alt="" onClick={()=>onClickLikeHandler(post.postId)}/>
+                                        : <img src="https://talk.op.gg/images/icon-vote-up.png" alt="" onClick={()=>navigate("/login")}/>}
                                         <div>{post.likeNum}</div>
                                     </div>
                                     <div className="article-list-item__content" onClick={()=> onClickDetailHandler(post.postId)}>
@@ -140,10 +165,14 @@ const CommunityPage=() =>{
                                 </button>
                                 :null}
 
-                                <button className="next-page" onClick={()=>onClickNextPageHandler()}>
+                                {posts?.length <5 ? 
+                                null
+                                :
+                                (<button className="next-page" onClick={()=>onClickNextPageHandler()}>
                                     <span>다음</span>
                                     <img src="https://talk.op.gg/images/icon-arrow-right@2x.png" alt=""/>
-                                </button>
+                                </button>)
+                                }
                             </div>
                         </div>
                     </StContent>
@@ -364,7 +393,7 @@ const StContent = styled.div`
     }
     .article-list-item{
         border-top: none;
-        min-height: 76px;
+        min-height: 100px;
         position: relative;
         display: table;
         table-layout: fixed;
@@ -379,7 +408,7 @@ const StContent = styled.div`
         display: table-cell;
         text-align: center;
         div{
-            margin-top: 5px;
+            margin-top: 10px;
             line-height: 17px;
             font-size: 14px;
             color: #7b858e;
@@ -394,6 +423,7 @@ const StContent = styled.div`
         cursor: pointer;
     }
     .article-list-item__title{
+        margin-bottom: 10px;
         display: flex;
         overflow: auto;
         vertical-align: top;
@@ -419,7 +449,7 @@ const StContent = styled.div`
     }
     .article-list-item__thumbnail{
         width: 93px;
-        height: 60px;
+        height: 83px;
         display: block;
         object-fit: cover;
         font-family: "object-fit: cover;";

@@ -26,7 +26,7 @@ const Layout = ({children}) => {
             })
         } 
     };
-    console.log(keyword)
+
     return(
         <St1WrapList>
             <Header/>

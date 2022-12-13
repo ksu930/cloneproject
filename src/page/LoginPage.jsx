@@ -7,11 +7,14 @@ import {
   logoutState,
   __loginUser,
 } from "../redux/modules/userSlice";
+import { useRecoilValue } from "recoil";
+import { Login } from "../store/store";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLogin } = useSelector((state) => state.user);
+  // const { isLogin } = useSelector((state) => state.user);
+  const isLogin = useRecoilValue(Login)
   const initialState = {
     email: "",
     password: "",
