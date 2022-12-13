@@ -9,6 +9,7 @@ import {
 } from "../redux/modules/userSlice";
 
 const LoginPage = () => {
+  const name = sessionStorage.getItem("name");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLogin } = useSelector((state) => state.user);
@@ -30,6 +31,7 @@ const LoginPage = () => {
     if (isLogin) {
       navigate("/");
       dispatch(loginState());
+      alert(`${name}님 환영합니다.`);
     } else {
       navigate("/login");
       dispatch(logoutState());

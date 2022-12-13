@@ -8,6 +8,7 @@ import {
   __nameCheck,
   __emailCheck,
 } from "../redux/modules/userSlice";
+import useInput from "../hooks/useInput";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -20,10 +21,10 @@ const SignupPage = () => {
   };
 
   const { overlapEmail, overlapName } = useSelector((state) => state.user);
-  const [emailCheck, setEmailCheck] = useState(false);
-  const [pwCheck, setPwCheck] = useState(false);
-  const [emailState, setEmailState] = useState(false);
   const [user, setUser] = useState(initialState);
+  const [emailCheck, setEmailCheck] = useInput(false);
+  const [pwCheck, setPwCheck] = useInput(false);
+  const [emailState, setEmailState] = useInput(false);
 
   const regPw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
   const regEmail =

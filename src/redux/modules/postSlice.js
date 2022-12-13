@@ -19,7 +19,9 @@ export const __getPost = createAsyncThunk(
   "post/getPost",
   async (page, thunkAPI) => {
     try {
-      const { data } = await api.get(`post?page=${page}`).then((res) => res.data);
+      const { data } = await api
+        .get(`post?page=${page}`)
+        .then((res) => res.data);
 
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -154,7 +156,9 @@ export const postSlice = createSlice({
     },
     //게시글 삭제
     [__deletePost.fulfilled]: (state, action) => {
-      state.posts = state.posts.filter((post) => post.postId !== action.payload);
+      state.posts = state.posts.filter(
+        (post) => post.postId !== action.payload
+      );
     },
     [__deletePost.rejected]: (state, action) => {},
     //게시글 수정
