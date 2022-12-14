@@ -1,5 +1,5 @@
 # 클론프로젝트 "OP.GG" (React)
-### :link: [프로젝트 바로가기](https://opggclone-1wetas09i-ksu930.vercel.app/ "프로젝트")
+### :link: [프로젝트 바로가기](http://clone--project.s3-website.ap-northeast-2.amazonaws.com/ "프로젝트")
 
 <br/>
 
