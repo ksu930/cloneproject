@@ -13,7 +13,7 @@ const MainPage = () => {
   }, [dispatch]);
 
   const titleList = useSelector((state) => state.post.best?.data);
-  console.log("타이틀리스트", titleList);
+
   return (
     <>
       <MainLayout>
@@ -420,7 +420,7 @@ const StFinalDiv = styled.div`
   }
 `;
 
-const StFinalA = styled.a`
+const StFinalA = styled.div`
   display: inline-block;
   width: 100%;
   line-height: 20px;

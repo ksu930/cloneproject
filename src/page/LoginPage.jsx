@@ -11,11 +11,10 @@ import { useRecoilValue } from "recoil";
 import { Login } from "../store/store";
 
 const LoginPage = () => {
-  const name = sessionStorage.getItem("name");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const { isLogin } = useSelector((state) => state.user);
-  const isLogin = useRecoilValue(Login);
+  const { isLogin } = useSelector((i) => i.user);
   const initialState = {
     email: "",
     password: "",
@@ -33,11 +32,9 @@ const LoginPage = () => {
     if (isLogin) {
       navigate("/");
       dispatch(loginState());
-      alert(`${name}님 환영합니다.`);
     } else {
       navigate("/login");
       dispatch(logoutState());
-      alert("아이디 비밀번호가 일치하지 않습니다");
     }
     // eslint-disable-next-line
   }, [isLogin]);

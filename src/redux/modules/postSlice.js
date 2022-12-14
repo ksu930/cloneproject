@@ -41,6 +41,7 @@ export const __postFeed = createAsyncThunk(
       });
       return thunkAPI.fulfillWithValue(res);
     } catch (err) {
+      alert("이미지 용량이 너무 큽니다.");
       return err;
     }
   }
@@ -125,7 +126,10 @@ export const __Keyword = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       // const res = await api.get(`post/search?keyword=${payload}&page=0`);
-      const  { data } = await api.get(`post/search?keyword=${payload}`).then((res) => res.data);;
+      const { data } = await api
+        .get(`post/search?keyword=${payload}`)
+        .then((res) => res.data);
+
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       return err;
@@ -224,7 +228,7 @@ export const postSlice = createSlice({
     [__deleteComment.rejected]: (state, action) => {},
     //검색
     [__Keyword.fulfilled]: (state, action) => {
-    state.posts = action.payload;
+      state.posts = action.payload;
     },
     [__Keyword.rejected]: (state, action) => {},
   },
