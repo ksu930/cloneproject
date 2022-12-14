@@ -9,13 +9,13 @@ const MainHeader = () => {
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("Access_Token");
   const name = sessionStorage.getItem("name");
-  const [isLogin, setIsLogin] = useRecoilState(Login)
+  const [isLogin, setIsLogin] = useRecoilState(Login);
   const LogoutButton = () => {
     sessionStorage.removeItem("Access_Token");
     sessionStorage.removeItem("Refresh_Token");
     sessionStorage.removeItem("name");
-    // dispatch(logoutState());
-    setIsLogin(false)
+    dispatch(logoutState());
+    setIsLogin(false);
     navigate("/");
     alert("로그아웃이 완료되었습니다");
   };

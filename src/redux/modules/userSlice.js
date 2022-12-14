@@ -122,7 +122,10 @@ export const userSlice = createSlice({
           action.payload.headers.refreshtoken
         );
         sessionStorage.setItem("name", action.payload.data.data.name);
-      } else {
+        alert(`${action.payload.data.data.name}님 환영합니다.`);
+      }
+      if (!action.payload.data.result) {
+        alert(`아이디와 비밀번호를 확인해주세요.`);
       }
     },
     [__loginUser.rejected]: (state, action) => {
